@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Stuck | Independent Africa: Angola | Kula Revise</title>
+<style>
+  :root {
+    --sand: #F2E9D9; --paper: #FBF6EB; --cut: #FFFCF4; --ink: #1B2A33;
+    --a1: #B4622D;         /* copper, accent one: nav, emphasis, option letters, progress */
+    --a2: #1F6B58;         /* malachite, accent two: earned, correct, band, breakdown */
+    --copper: var(--a1); --malachite: var(--a2);   /* aliases so existing rules inherit the split */
+    --clay: #8C4A2F; --fade: #7B7263;
+    --serif: Georgia, 'Times New Roman', serif;
+    --sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  /* Mode toggle, fixed bottom right. The skin supplies body.alt. */
+  .mode-toggle {
+    position: fixed; bottom: 0.9rem; right: 0.9rem; z-index: 40;
+    display: flex; align-items: center; gap: 0.4rem;
+    font-family: var(--sans); font-size: 0.66rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0.55rem 0.75rem; min-height: 2.4rem;
+    background: var(--paper); color: var(--fade);
+    border: 1px solid rgba(0,0,0,0.18); cursor: pointer;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.16);
+  }
+  .mode-toggle:hover { color: var(--ink); border-color: var(--a1); }
+  .mode-toggle:focus-visible { outline: 2px solid var(--a1); outline-offset: 2px; }
+  .mode-toggle svg { width: 0.9rem; height: 0.9rem; fill: none; stroke: currentColor; stroke-width: 1.6; }
+  @media print { .mode-toggle { display: none; } }
+  /* ANGOLA: chamber and cable
+   Independent Africa is one CAPS topic with two strands. The Congo is the essay
+   strand and holds Ore Seam, so Angola must not read as a variant of it.
+   The metaphor comes from what the sources actually are: this strand is argued
+   in rooms where outside powers speak about Angola in front of each other, and
+   recorded as tabled papers with a symbol in the corner. */
+
+:root {
+  /* grounds and ink: cool slate against a cold paper, not warm sand */
+  --sand:  #E4E7E4;   /* page background */
+  --paper: #F7F8F6;   /* cards */
+  --cut:   #EDF0EE;   /* insets, sources, carousels */
+  --ink:   #1A2327;   /* body text */
+  --clay:  #5C6B73;   /* stage tags, quiet labels: steel, not terracotta */
+  --fade:  #79858B;   /* muted text, captions */
+  /* accents: brick red for the argued line, deep teal for the settled one */
+  --a1: #9C3D2E;  --a1-rgb: 156,61,46;
+  --a2: #24565C;  --a2-rgb: 36,86,92;
+  /* type: a transitional serif for the history, mono for anything with a symbol */
+  --serif: 'Source Serif 4', 'Charter', Georgia, serif;
+  --sans:  'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+  --mono:  'IBM Plex Mono', ui-monospace, Consolas, monospace;
+}
+
+/* Flat ground. Ore Seam layers two warm radial washes; this one is a cold
+   surface with a faint vertical rule, like paper on a table. */
+body {
+  background-image:
+    repeating-linear-gradient(90deg, transparent 0 38px, rgba(26,35,39,0.028) 38px 39px) !important;
+}
+
+/* Edges are square and ruled rather than soft. Every card carries a hairline
+   and a single accent stripe at the head. */
+.card, .source, .stat-wrap, .carousel, .kt {
+  border-radius: 0 !important;
+  border: 1px solid rgba(36,86,92,0.20) !important;
+  box-shadow: none !important;
+}
+.card { border-top: 3px solid var(--a2) !important; }
+
+/* Labels, dates and any document symbol go to mono. This is the strand's
+   signature: provenance is carried by the typography, not explained. */
+.stage-tag, .cover-eyebrow, .top-meta, .story-unit, .kt-label,
+.expl-label, .results-eyebrow, .pop-label, .chip, .marks, .stat-label {
+  font-family: var(--mono) !important;
+  letter-spacing: 0.14em !important;
+}
+
+/* Sources set as tabled papers: margin rule down the left, symbol line right. */
+.source {
+  background: var(--cut) !important;
+  border-left: 3px solid var(--a1) !important;
+  padding-left: 1.35rem !important;
+}
+.source-attr {
+  font-family: var(--mono) !important;
+  font-size: 0.68rem !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase;
+  color: var(--a1) !important;
+  text-align: right;
+  border-bottom: 1px solid rgba(36,86,92,0.18);
+  padding-bottom: 0.6rem;
+  margin-bottom: 0.9rem;
+}
+
+/* Cover flourish. The v2 default is a warm radial arc fan plus three dots.
+   Both are Ore Seam signatures, so both go. In their place: a ruled bar with a
+   single brick mark at the left, like a document reference stripe. */
+.header-block::before, .cover-arc, .cover-fan { display: none !important; }
+.rule, .cover-rule, .flourish {
+  width: 128px !important;
+  height: 2px !important;
+  background-image: none !important;
+  background: linear-gradient(90deg,
+    var(--a1) 0 20%, rgba(36,86,92,0.30) 20% 100%) !important;
+}
+
+/* The cover lede is italic serif in v2; here it is upright, so the opening
+   screen reads as a tabled statement rather than a caption. */
+.cover-line { font-style: normal !important; color: var(--clay) !important; }
+
+/* Chips: square, mono, and keyed to the source spine rather than the essay one. */
+.chip { border-radius: 0 !important; font-size: 0.6rem !important; }
+
+/* Begin button: outlined rather than solid, so the cover reads cooler. */
+.btn-begin {
+  background: transparent !important;
+  color: var(--ink) !important;
+  border: 2px solid var(--ink) !important;
+}
+.btn-begin:hover { background: var(--ink) !important; color: var(--paper) !important; }
+
+
+/* Dark mode. The slate ground goes to deep ink and the papers to a cold
+   charcoal, so the chamber reads as the same room after hours. */
+body.alt {
+  --sand:  #141A1D;
+  --paper: #1D2529;
+  --cut:   #232C31;
+  --ink:   #E6EBEA;
+  --clay:  #93A3AB;
+  --fade:  #8B979D;
+  --a1: #D0664F;  --a1-rgb: 208,102,79;
+  --a2: #58A6A2;  --a2-rgb: 88,166,162;
+}
+body.alt { background-image:
+  repeating-linear-gradient(90deg, transparent 0 38px, rgba(230,235,234,0.035) 38px 39px) !important; }
+body.alt .card, body.alt .source, body.alt .stat-wrap,
+body.alt .carousel, body.alt .kt { border-color: rgba(88,166,162,0.28) !important; }
+body.alt .btn-begin { border-color: var(--ink) !important; color: var(--ink) !important; }
+body.alt .btn-begin:hover { background: var(--ink) !important; color: var(--sand) !important; }
+body.alt .mode-toggle { background: var(--paper); border-color: rgba(230,235,234,0.24); }
+
+/* The RECALL chip keeps its light background in dark mode, so it glares.
+   Tier chips get dark-mode grounds of their own. */
+body.alt .chip { background: rgba(88,166,162,0.16) !important; color: #BFE0DD !important; }
+body.alt .chip-recall,  body.alt .chip-extract   { background: rgba(208,102,79,0.20) !important; color: #F0BAAB !important; }
+body.alt .chip-understand, body.alt .chip-interpret { background: rgba(88,166,162,0.18) !important; color: #B7DEDA !important; }
+body.alt .chip-apply,   body.alt .chip-evaluate  { background: rgba(230,235,234,0.16) !important; color: #E6EBEA !important; }
+/* Options need a visible edge against the charcoal card. */
+body.alt .option-btn, body.alt .opt-btn { border-color: rgba(230,235,234,0.20) !important; }
+
+
+/* ---- DARK MODE STATE COLOURS -----------------------------------------------
+   The base variables flip, but several states carry hardcoded light values.
+   Left alone they produce pale text on pale grounds. */
+
+/* Answer states: dark grounds with a coloured edge, text stays --ink. */
+body.alt .option-btn.correct {
+  background: rgba(88,166,162,0.16) !important;
+  border-color: #58A6A2 !important;
+  color: var(--ink) !important;
+}
+body.alt .option-btn.wrong {
+  background: rgba(208,102,79,0.16) !important;
+  border-color: #D0664F !important;
+  color: var(--ink) !important;
+}
+body.alt .option-btn.correct .opt-text,
+body.alt .option-btn.wrong   .opt-text { color: var(--ink) !important; }
+body.alt .option-btn.correct .opt-letter { color: #7FC7C2 !important; }
+body.alt .option-btn.wrong   .opt-letter { color: #E89A87 !important; }
+body.alt .opt-mark { color: var(--ink) !important; }
+/* v2 dims the options a learner did not pick; at 0.45 on a dark ground they vanish. */
+body.alt .option-btn.dimmed { opacity: 0.72 !important; }
+
+/* The full-check button is dark-on-dark once the ground inverts. */
+body.alt .primary-btn {
+  background: var(--cut) !important;
+  border: 1px solid rgba(88,166,162,0.40) !important;
+  color: var(--ink) !important;
+}
+body.alt .primary-btn:hover { background: #2B363C !important; }
+body.alt .primary-btn .btn-title { color: var(--ink) !important; }
+body.alt .primary-btn .btn-sub,
+body.alt .primary-btn .btn-arrow { color: var(--clay) !important; }
+
+/* Section rows and the small action button. */
+body.alt .section-btn { border-color: rgba(230,235,234,0.18) !important; color: var(--ink) !important; }
+body.alt .section-btn:hover { background: var(--cut) !important; border-color: var(--a2) !important; }
+body.alt .primary-btn-small { background: var(--a2) !important; color: #0E1518 !important; }
+body.alt .primary-btn-small:hover:not(:disabled) { background: #6FBCB7 !important; }
+body.alt .secondary-btn { border-color: rgba(230,235,234,0.30) !important; color: var(--ink) !important; }
+body.alt .secondary-btn:hover:not(:disabled) { background: var(--cut) !important; }
+
+/* The explanation panel and the quiz footer links. */
+body.alt .explanation { background: var(--cut) !important; border-color: rgba(88,166,162,0.28) !important; }
+body.alt .expl-text { color: var(--ink) !important; }
+body.alt .quiz-foot a, body.alt .quiz-foot { color: var(--clay) !important; }
+
+
+/* The lesson engine uses .option where the quiz uses .option-btn, so the
+   state overrides have to name both or half the product stays broken. */
+body.alt .option { background: var(--cut) !important; border-color: rgba(230,235,234,0.18) !important; color: var(--ink) !important; }
+body.alt .option.selected { background: rgba(208,102,79,0.14) !important; border-color: #D0664F !important; }
+body.alt .option.correct {
+  background: rgba(88,166,162,0.16) !important;
+  border-color: #58A6A2 !important;
+  color: var(--ink) !important;
+}
+body.alt .option.wrong {
+  background: rgba(208,102,79,0.16) !important;
+  border-color: #D0664F !important;
+  color: var(--ink) !important;
+}
+body.alt .option.correct .opt-text,
+body.alt .option.wrong   .opt-text { color: var(--ink) !important; }
+body.alt .option.correct .opt-letter { color: #7FC7C2 !important; }
+body.alt .option.wrong   .opt-letter { color: #E89A87 !important; }
+body.alt .option.dimmed { opacity: 0.72 !important; }
+
+
+/* The toggle is fixed bottom right and lands on the Continue button on a short
+   viewport. Lift it clear and give the page room underneath. */
+.mode-toggle { bottom: 1rem; right: 1rem; }
+body { padding-bottom: 4.5rem !important; }
+@media (max-width: 520px) {
+  .mode-toggle { bottom: 0.7rem; right: 0.7rem; padding: 0.45rem 0.6rem; font-size: 0.6rem; }
+}
+
+
+/* Figures. Captions read left, not centred, and at a measure that holds. */
+.figure figcaption {
+  text-align: left !important;
+  max-width: 34rem;
+  margin-left: auto; margin-right: auto;
+  font-size: 0.84rem !important;
+  color: var(--clay) !important;
+  border-top: 1px solid rgba(36,86,92,0.20);
+  padding-top: 0.6rem;
+}
+.figure img { border: 1px solid rgba(36,86,92,0.30) !important; }
+body.alt .figure img { border-color: rgba(88,166,162,0.30) !important; }
+body.alt .figure figcaption { border-top-color: rgba(88,166,162,0.24); }
+/* An archival photograph should not glare against the dark ground. */
+body.alt .figure img { filter: brightness(0.9) contrast(1.02); }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    background:
+      repeating-linear-gradient(90deg, rgba(27,42,51,0.028) 0 1px, transparent 1px 5px),
+      radial-gradient(ellipse at top right, rgba(180,98,45,0.10) 0%, transparent 58%),
+      radial-gradient(ellipse at bottom left, rgba(31,107,88,0.09) 0%, transparent 58%),
+      var(--sand);
+    padding: 2rem 1rem 3rem;
+    font-family: var(--serif);
+    color: var(--ink); line-height: 1.6; -webkit-text-size-adjust: 100%;
+    -webkit-user-select: none; user-select: none;
+  }
+  .container { max-width: 780px; margin: 0 auto; }
+  .header-block { text-align: center; margin-bottom: 2rem; padding: 1.4rem 0 1.2rem; position: relative; }
+  .header-block::before {
+    content: ""; position: absolute; z-index: 0; top: 0; left: 50%; transform: translateX(-50%);
+    width: 260px; height: 92px; pointer-events: none;
+    background: repeating-radial-gradient(circle at 50% 100%, rgba(180,98,45,0.30) 0 2px, transparent 2px 15px);
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 92%);
+    mask-image: linear-gradient(to bottom, #000 0%, transparent 92%);
+  }
+  .eyebrow { font-family: var(--sans); position: relative; z-index: 1; font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--clay); font-weight: 700; margin-bottom: 0.9rem; }
+  .masthead { position: relative; z-index: 1; font-size: clamp(2.2rem,6.4vw,3.4rem); font-weight: 800; line-height: 1.04; letter-spacing: -0.025em; }
+  .sub { position: relative; z-index: 1; font-size: 1rem; color: var(--fade); margin-top: 0.6rem; }
+  .rule { width: 92px; height: 9px; margin: 1.6rem auto 0;
+    background:
+      radial-gradient(circle at 9px 4.5px, var(--a1) 0 4px, transparent 4.5px),
+      radial-gradient(circle at 46px 4.5px, var(--a1) 0 4px, transparent 4.5px),
+      radial-gradient(circle at 83px 4.5px, var(--a1) 0 4px, transparent 4.5px); }
+  .intro-box { background: var(--paper); border: 1px solid rgba(27,42,51,0.12); border-left: 5px solid var(--malachite); padding: 1.4rem 1.6rem; margin-bottom: 2rem; }
+  .intro-label { font-family: var(--sans); font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--malachite); font-weight: 700; margin-bottom: 0.6rem; }
+  .intro-text { line-height: 1.68; font-size: 1rem; }
+  .key-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem; margin-bottom: 2.2rem; }
+  .key-item { display: flex; flex-direction: column; gap: 0.45rem; padding: 0.85rem; background: var(--paper); border: 1px solid rgba(27,42,51,0.1); }
+  .chip { font-family: var(--sans); display: inline-block; padding: 0.22rem 0.7rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; width: fit-content; }
+  .chip-recall { background: #E7D6C4; color: #7B3F1C; }
+  .chip-understand { background: #D6E3DB; color: #1B5445; }
+  .chip-apply { background: var(--ink); color: #F0E3CF; }
+  .key-desc { font-size: 0.83rem; color: var(--fade); }
+  .sections-label { font-family: var(--sans); font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--fade); text-align: center; margin-bottom: 1.2rem; font-weight: 700; }
+  .primary-btn { font-family: var(--sans); width: 100%; display: flex; align-items: center; gap: 1rem; padding: 1.3rem 1.5rem; background: var(--ink); color: #F4EADA; border: none; cursor: pointer; font-family: inherit; text-align: left; transition: all 0.2s; margin-bottom: 1rem; }
+  .primary-btn:hover { background: #12202a; transform: translateX(4px); }
+  .btn-num { font-family: var(--sans); font-size: 1.4rem; color: var(--copper); font-weight: 800; min-width: 35px; }
+  .btn-txt { flex: 1; display: flex; flex-direction: column; gap: 0.2rem; }
+  .btn-title { font-family: var(--sans); font-size: 1.15rem; font-weight: 700; }
+  .btn-sub { font-family: var(--sans); font-size: 0.82rem; color: #cbb9a0; }
+  .btn-arrow { font-size: 1.3rem; color: var(--copper); }
+  .section-list { display: flex; flex-direction: column; gap: 0.5rem; }
+  .section-btn { display: flex; align-items: center; gap: 1rem; padding: 0.95rem 1.1rem; background: transparent; border: 1px solid rgba(27,42,51,0.2); cursor: pointer; font-family: inherit; text-align: left; transition: all 0.2s; color: var(--ink); }
+  .section-btn:hover { background: var(--paper); border-color: var(--copper); }
+  .section-roman { font-family: var(--sans); color: var(--copper); font-weight: 800; min-width: 35px; font-size: 0.95rem; }
+  .section-name { flex: 1; font-size: 0.95rem; }
+  .section-count { font-size: 0.78rem; color: var(--fade); letter-spacing: 0.05em; }
+  .footer { text-align: center; font-size: 0.79rem; color: var(--fade); margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(27,42,51,0.14); line-height: 1.6; }
+
+  .quiz-top { margin-bottom: 1.5rem; }
+  .quiz-eyebrow { font-family: var(--sans); display: flex; justify-content: space-between; align-items: baseline; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--malachite); font-weight: 700; margin-bottom: 0.55rem; gap: 1rem; }
+  .quiz-progress { color: var(--fade); font-weight: 500; letter-spacing: 0.04em; text-transform: none; }
+  .progress-track { height: 3px; background: rgba(27,42,51,0.12); overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--copper); transition: width 0.35s ease; }
+  .quiz-card { background: var(--paper); border: 1px solid rgba(27,42,51,0.12); border-left: 5px solid var(--copper); padding: 1.7rem 1.5rem; margin-bottom: 1.3rem; }
+  .quiz-meta { display: flex; gap: 0.6rem; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; }
+  .section-tag { font-family: var(--sans); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--clay); font-weight: 700; }
+  .question-text { font-size: 1.24rem; line-height: 1.4; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 1.3rem; }
+  .options { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.2rem; }
+  .option-btn { display: flex; align-items: flex-start; gap: 0.85rem; padding: 1rem 1.05rem; background: var(--sand); border: 1px solid rgba(27,42,51,0.13); cursor: pointer; font-family: inherit; text-align: left; font-size: 0.97rem; line-height: 1.55; color: var(--ink); transition: all 0.18s; width: 100%; }
+  .option-btn:hover:not(:disabled) { background: var(--cut); border-color: var(--copper); }
+  .option-btn:disabled { cursor: default; }
+  .option-btn.selected { background: var(--cut); border-color: var(--copper); border-width: 2px; padding: 0.94rem 0.99rem; }
+  .option-btn.correct { background: #E2EDE4; border-color: var(--malachite); border-width: 2px; padding: 0.94rem 0.99rem; }
+  .option-btn.wrong { background: #F2DDD3; border-color: var(--clay); border-width: 2px; padding: 0.94rem 0.99rem; }
+  .option-btn.dimmed { opacity: 0.48; }
+  .opt-letter { font-weight: 800; color: var(--copper); min-width: 1.1rem; }
+  .opt-text { flex: 1; }
+  .opt-mark { font-weight: 700; font-size: 1.1rem; }
+  .explanation { background: var(--cut); border: 1px solid rgba(27,42,51,0.12); border-left: 5px solid var(--malachite); padding: 1.15rem 1.2rem; margin-bottom: 0.3rem; }
+  .expl-label { font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--malachite); font-weight: 700; margin-bottom: 0.5rem; }
+  .expl-text { line-height: 1.68; font-size: 0.95rem; }
+  .quiz-actions { display: flex; justify-content: space-between; gap: 0.8rem; margin-top: 1.2rem; }
+  .secondary-btn { padding: 0.8rem 1.2rem; background: transparent; border: 1px solid rgba(27,42,51,0.28); color: var(--ink); font-family: inherit; font-size: 0.92rem; font-weight: 600; cursor: pointer; }
+  .secondary-btn:hover:not(:disabled) { background: var(--paper); }
+  .secondary-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+  .primary-btn-small { padding: 0.85rem 1.5rem; background: var(--malachite); border: none; color: #F7F1E4; font-family: inherit; font-size: 0.95rem; cursor: pointer; font-weight: 700; }
+  .primary-btn-small:hover:not(:disabled) { background: #164C3F; }
+  .primary-btn-small:disabled { opacity: 0.35; cursor: not-allowed; }
+  .quiz-foot { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+  .link-btn { background: transparent; border: none; color: var(--fade); font-family: inherit; font-size: 0.85rem; cursor: pointer; text-decoration: underline; }
+  .score-tally { font-size: 0.82rem; color: var(--fade); font-weight: 600; }
+
+  .score-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.9rem; margin-bottom: 1.4rem; }
+  .score-block { background: var(--paper); border: 1px solid rgba(27,42,51,0.12); border-top: 4px solid var(--copper); padding: 1.3rem 0.8rem; text-align: center; }
+  .score-num { font-size: 2.6rem; font-weight: 800; color: var(--ink); line-height: 1; letter-spacing: -0.03em; }
+  .score-num.red { color: var(--clay); }
+  .score-den { font-size: 1.1rem; color: var(--fade); font-weight: 500; }
+  .score-label { font-family: var(--sans); font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--fade); margin-top: 0.5rem; font-weight: 700; }
+  .compare-line { text-align: center; font-weight: 700; color: var(--malachite); background: var(--paper); border: 1px solid rgba(31,107,88,0.25); padding: 0.9rem 1rem; margin-bottom: 1.5rem; }
+  .score-word { font-family: var(--sans); font-size: 1.3rem; font-weight: 800; color: var(--a2); line-height: 2; letter-spacing: -0.01em; }
+  .grade-desc { text-align: center; margin-bottom: 1.6rem; padding: 0 0.5rem; line-height: 1.65; }
+  .breakdown { background: var(--paper); border: 1px solid rgba(27,42,51,0.12); padding: 1.3rem; margin-bottom: 1.4rem; }
+  .breakdown-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--malachite); font-weight: 700; margin-bottom: 1rem; text-align: center; }
+  .breakdown-row { display: grid; grid-template-columns: 1fr 96px 44px; gap: 0.7rem; align-items: center; margin-bottom: 0.7rem; font-size: 0.86rem; }
+  .breakdown-name { font-weight: 600; }
+  .breakdown-bar { height: 9px; background: rgba(27,42,51,0.08); overflow: hidden; }
+  .breakdown-fill { height: 100%; background: var(--copper); transition: width 0.4s; }
+  .breakdown-score { color: var(--fade); text-align: right; font-weight: 700; }
+  .review-all-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fade); font-weight: 700; margin-bottom: 1rem; text-align: center; }
+  .review-card { background: var(--paper); border: 1px solid rgba(27,42,51,0.12); padding: 1.1rem 1.2rem; margin-bottom: 0.8rem; border-left: 4px solid var(--fade); }
+  .review-card.got { border-left-color: var(--malachite); }
+  .review-card.missed { border-left-color: var(--clay); }
+  .review-q { font-weight: 700; font-size: 0.95rem; margin-bottom: 0.5rem; line-height: 1.4; }
+  .review-a { font-size: 0.88rem; line-height: 1.55; margin-bottom: 0.3rem; }
+  .review-a .lab { font-weight: 700; }
+  .review-a.yours-wrong { color: var(--clay); }
+  .review-a.right { color: var(--malachite); }
+  .review-actions { margin-top: 1.6rem; }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- MENU -->
+  <div id="menu-screen">
+    <div class="header-block">
+      <div class="eyebrow">Kula Revise &middot; Grade 12 History &middot; Angola</div>
+      <h1 class="masthead">What Stuck</h1>
+      <div class="sub" id="masthead-sub">After Lesson 5</div>
+      <div class="rule"></div>
+    </div>
+    <div class="intro-box">
+      <div class="intro-label">Before you start</div>
+      <p class="intro-text"><span id="intro-body"></span></p>
+    </div>
+    <div class="key-row">
+      <div class="key-item"><span class="chip chip-recall">Recall</span><span class="key-desc">The fact itself: a date, name or policy</span></div>
+      <div class="key-item"><span class="chip chip-understand">Understand</span><span class="key-desc">What the fact means or why it happened</span></div>
+      <div class="key-item"><span class="chip chip-apply">Apply</span><span class="key-desc">Spot what is wrong with a claim</span></div>
+    </div>
+    <div>
+      <div class="sections-label">&mdash; Choose what to answer &mdash;</div>
+      <button class="primary-btn" data-filter="all">
+        <span class="btn-num">I.</span>
+        <span class="btn-txt"><span class="btn-title">Full check</span><span class="btn-sub">All 18 questions &middot; all five sections</span></span>
+        <span class="btn-arrow">&rarr;</span>
+      </button>
+      <div class="section-list" id="section-list"></div>
+    </div>
+    <div class="footer">About 12 minutes for the full set. Have your score from the first check ready.</div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz-screen" class="hidden">
+    <div class="quiz-top">
+      <div class="quiz-eyebrow"><span id="quiz-section-name"></span><span class="quiz-progress" id="quiz-progress"></span></div>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width: 0%"></div></div>
+    </div>
+    <div class="quiz-card">
+      <div class="quiz-meta"><span class="section-tag" id="section-tag"></span><span class="chip" id="difficulty-chip"></span></div>
+      <h2 class="question-text" id="question-text"></h2>
+      <div class="options" id="options-container"></div>
+      <div class="explanation hidden" id="explanation"><div class="expl-label">Why</div><div class="expl-text" id="expl-text"></div></div>
+      <div class="quiz-actions">
+        <button class="secondary-btn" id="prev-btn">&larr; Previous</button>
+        <button class="primary-btn-small" id="action-btn">Submit answer</button>
+      </div>
+    </div>
+    <div class="quiz-foot">
+      <button class="link-btn" id="exit-btn">Exit to menu</button>
+      <span class="score-tally" id="score-tally">Score so far: 0 / 0</span>
+    </div>
+  </div>
+
+  <!-- REVIEW -->
+  <div id="review-screen" class="hidden">
+    <div class="header-block">
+      <div class="eyebrow">After the lessons</div>
+      <h1 class="masthead" style="font-size: clamp(1.9rem,5vw,2.8rem);">Where You Stand</h1>
+      <div class="rule"></div>
+    </div>
+    <div class="score-row">
+      <div class="score-block"><div class="score-num"><span id="score-correct">0</span><span class="score-den">/<span id="score-total">0</span></span></div><div class="score-label">Correct</div></div>
+      <div class="score-block"><div class="score-num"><span id="score-percent">0</span><span class="score-den">%</span></div><div class="score-label">Accuracy</div></div>
+      <div class="score-block"><div class="score-word" id="score-grade">-</div><div class="score-label">Band</div></div>
+    </div>
+    <div class="grade-desc" id="grade-desc"></div>
+    <p class="compare-line hidden" id="compare-line"></p>
+    <div class="breakdown"><div class="breakdown-label">By tier</div><div id="level-rows"></div></div>
+    <div class="breakdown"><div class="breakdown-label">By section</div><div id="breakdown-rows"></div></div>
+    <div><div class="review-all-label">Every question</div><div id="review-cards"></div></div>
+    <div class="review-actions">
+      <button class="primary-btn" id="restart-btn"><span class="btn-txt"><span class="btn-title">Return to menu</span><span class="btn-sub">Try another section or retake the full test</span></span><span class="btn-arrow">&#8635;</span></button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* kula: re-entry guard. Every declaration below is function scoped, so a
+   viewer that re-runs this script re-initialises instead of throwing a
+   redeclaration SyntaxError and leaving FLOW undefined. */
+(function(){
+const MODE = "b";
+const INTRO = "The same eighteen facts as the first check, asked from the other direction, so remembering the shape of the earlier questions will not help you. You have done the lessons now. This is about what is still there.";
+const SECTIONS = ["Portugal holds on", "Alvor and the three movements", "The powers arrive", "South Africa", "Cuito Cuanavale and after"];
+const QUESTIONS = [
+  {
+    "id": 1,
+    "slot": 1,
+    "section": "Portugal holds on",
+    "tier": "Recall",
+    "question": "The 1961 uprisings against Portuguese rule broke out in the north and in which city?",
+    "options": [
+      "Luanda",
+      "Lisbon",
+      "Cabinda",
+      "Benguela"
+    ],
+    "correct": 0,
+    "explanation": "Luanda, alongside the north. It's the capital, and it's the city the MPLA holds through 1975, so you'll meet it again. Option {opt2} is the oil enclave, which matters later for a different reason."
+  },
+  {
+    "id": 2,
+    "slot": 2,
+    "section": "Portugal holds on",
+    "tier": "Recall",
+    "question": "Which Portuguese leader's government was removed by the army officers in 1974?",
+    "options": [
+      "Marcelo Caetano",
+      "Antonio Salazar",
+      "Agostinho Neto",
+      "Mario Soares"
+    ],
+    "correct": 0,
+    "explanation": "Caetano headed the government the officers removed. Salazar's the common slip and some textbooks print it, but he'd had a stroke in 1968 and died in 1970. So writing Salazar into a 1974 answer puts you six years out."
+  },
+  {
+    "id": 3,
+    "slot": 3,
+    "section": "Portugal holds on",
+    "tier": "Understand",
+    "question": "What did Portugal's refusal to decolonise cost it by the early 1970s?",
+    "options": [
+      "Almost half its national budget was going on the colonial wars",
+      "It lost its seat at the United Nations over the wars",
+      "Its army refused to serve anywhere in Africa at all",
+      "It was expelled from all its trade agreements in Europe"
+    ],
+    "correct": 0,
+    "explanation": "Almost half the national budget by the early 1970s. That's the figure you quote when you're asked why the wars ended. Options {opt1} and {opt2} sound like plausible punishments, but neither happened."
+  },
+  {
+    "id": 4,
+    "slot": 4,
+    "section": "Portugal holds on",
+    "tier": "Understand",
+    "question": "Why did independence for Angola come suddenly rather than through a planned handover?",
+    "options": [
+      "The government that had refused to leave was overthrown at home",
+      "The United Nations set a deadline which Portugal then accepted",
+      "The three movements together defeated the Portuguese army in the field",
+      "Portugal ran out of soldiers and formally surrendered in Luanda"
+    ],
+    "correct": 0,
+    "explanation": "The regime that had refused to go was removed at home. Option {opt2} is close to what the movements claimed themselves, and you can see why. But the collapse happened in Lisbon."
+  },
+  {
+    "id": 5,
+    "slot": 5,
+    "section": "Alvor and the three movements",
+    "tier": "Recall",
+    "question": "Which agreement fixed the date on which Angola would become independent?",
+    "options": [
+      "The Alvor Agreement",
+      "The Lusaka Accord",
+      "The Bicesse Accords",
+      "The Mombasa Declaration"
+    ],
+    "correct": 0,
+    "explanation": "Alvor, signed January 1975. You'll be asked for two of its aims, so the name is worth holding. Option {opt1} is a real Angolan agreement, but from 1991."
+  },
+  {
+    "id": 6,
+    "slot": 6,
+    "section": "Alvor and the three movements",
+    "tier": "Recall",
+    "question": "Which movement was led by Jonas Savimbi?",
+    "options": [
+      "UNITA",
+      "The MPLA",
+      "The FNLA",
+      "The MFA"
+    ],
+    "correct": 0,
+    "explanation": "Savimbi led UNITA, backed first by China and later by the United States and South Africa. Holden Roberto led the FNLA, and those two names get swapped more than any other pair here. Option {opt3} is the Portuguese Armed Forces Movement."
+  },
+  {
+    "id": 7,
+    "slot": 7,
+    "section": "Alvor and the three movements",
+    "tier": "Understand",
+    "question": "Why did Angola reach independence in November 1975 with no elected government?",
+    "options": [
+      "The elections that Alvor promised were never held",
+      "The elections were held but the results were annulled",
+      "Portugal cancelled independence and stayed on past November",
+      "The Organisation of African Unity banned the elections"
+    ],
+    "correct": 0,
+    "explanation": "The elections Alvor promised were never held. That's what turns a decolonisation into a civil war, and it's the sentence you want. Option {opt1} assumes a vote that never took place."
+  },
+  {
+    "id": 8,
+    "slot": 8,
+    "section": "Alvor and the three movements",
+    "tier": "Apply",
+    "question": "What is wrong with this claim? 'The Alvor Agreement collapsed before it was ever signed.'",
+    "options": [
+      "It was signed in January 1975 and then broke down",
+      "It was signed but only by two of the three movements",
+      "It was never a written agreement, only a spoken one",
+      "It collapsed in 1974, before the coup in Lisbon happened"
+    ],
+    "correct": 0,
+    "explanation": "Signed in January 1975, then broke down during the transition. The fighting comes after the signing, not instead of it. Option {opt3} puts the collapse before the coup that made the agreement possible, which you can rule out on the dates alone."
+  },
+  {
+    "id": 9,
+    "slot": 9,
+    "section": "The powers arrive",
+    "tier": "Recall",
+    "question": "Alongside the United States, which power backed the FNLA?",
+    "options": [
+      "China",
+      "Cuba",
+      "The Soviet Union",
+      "Portugal"
+    ],
+    "correct": 0,
+    "explanation": "China, alongside the United States. Leave China out and you've made Angola look like a straight superpower duel. Option {opt2} was on the opposite side, backing the MPLA."
+  },
+  {
+    "id": 10,
+    "slot": 10,
+    "section": "The powers arrive",
+    "tier": "Recall",
+    "question": "What had Cuba already sent to Angola in October 1975, before any combat troops?",
+    "options": [
+      "Military instructors",
+      "Fighter aircraft",
+      "A naval blockade",
+      "Food aid only"
+    ],
+    "correct": 0,
+    "explanation": "Instructors, in October. They train; a military unit fights. Cuba draws that line carefully, because you'll be asked which arrived first. Option {opt1} came from the Soviet Union, and later."
+  },
+  {
+    "id": 11,
+    "slot": 11,
+    "section": "The powers arrive",
+    "tier": "Understand",
+    "question": "Why was the MPLA's request to Cuba important to how Cuba explained its role?",
+    "options": [
+      "It let Cuba present itself as invited rather than directed",
+      "It gave Cuba legal ownership of Angola's oil revenue",
+      "It obliged the Soviet Union to send troops as well",
+      "It meant Cuba did not have to send any soldiers"
+    ],
+    "correct": 0,
+    "explanation": "An invitation lets Cuba present its role as solidarity rather than obedience. Option {opt2} confuses a request for help with a treaty obligation, and you'll want to keep those apart."
+  },
+  {
+    "id": 12,
+    "slot": 12,
+    "section": "The powers arrive",
+    "tier": "Apply",
+    "question": "What is wrong with this claim? 'Cuban troops arrived before independence was declared.'",
+    "options": [
+      "The first unit was sent days before, and fought after",
+      "Cuban troops only arrived a full year after independence",
+      "Cuba sent no troops until the Soviet Union ordered it",
+      "Independence was declared before the coup happened in Lisbon"
+    ],
+    "correct": 0,
+    "explanation": "The timing's tight rather than obviously wrong, which is what makes it worth a second look from you. The first unit went in the days around 5 November, and the fighting followed independence on the 11th. Option {opt3} is a chronology error big enough to sink a paragraph."
+  },
+  {
+    "id": 13,
+    "slot": 13,
+    "section": "South Africa",
+    "tier": "Recall",
+    "question": "How long before Angolan independence did South African forces enter the country?",
+    "options": [
+      "About a month",
+      "About a year",
+      "About a week",
+      "About three years"
+    ],
+    "correct": 0,
+    "explanation": "About a month. The gap is what tells you the advance was aimed at who'd hold Luanda on the day. Option {opt2} would make the invasion a response to an MPLA government rather than an attempt to prevent one."
+  },
+  {
+    "id": 14,
+    "slot": 14,
+    "section": "South Africa",
+    "tier": "Understand",
+    "question": "What did Pretoria believe an MPLA government in Luanda would allow?",
+    "options": [
+      "Bases for fighters operating against its rule",
+      "Free movement of white settlers back to Portugal",
+      "A Soviet naval port on the Angolan coastline",
+      "The immediate independence of Namibia by treaty"
+    ],
+    "correct": 0,
+    "explanation": "Bases: SWAPO fighting for Namibia, and the ANC closer to South Africa itself. Option {opt2} is what Pretoria was trying to prevent, so it answers a question you weren't asked."
+  },
+  {
+    "id": 15,
+    "slot": 15,
+    "section": "South Africa",
+    "tier": "Understand",
+    "question": "Why did Pretoria frame its invasion of Angola in Cold War terms?",
+    "options": [
+      "It made an apartheid state look like a Western partner",
+      "It was required to do so by the United Nations Charter",
+      "It had no regional reasons at all for intervening in Angola",
+      "It wanted the Soviet Union to join in the negotiations"
+    ],
+    "correct": 0,
+    "explanation": "It let a state isolated over apartheid look like a partner against communism. Option {opt2} is wrong: the regional reasons were real and came first. Pretoria had both, and you can see which one it chose to say out loud."
+  },
+  {
+    "id": 16,
+    "slot": 16,
+    "section": "Cuito Cuanavale and after",
+    "tier": "Recall",
+    "question": "Which battle is usually treated as the turning point of the war in Angola?",
+    "options": [
+      "Cuito Cuanavale",
+      "The Luanda siege",
+      "The Benguela landings",
+      "The Cabinda raid"
+    ],
+    "correct": 0,
+    "explanation": "Cuito Cuanavale. The disagreement over who won it is itself examinable, so you need the name. Option {opt1} isn't an event in the form given here."
+  },
+  {
+    "id": 17,
+    "slot": 17,
+    "section": "Cuito Cuanavale and after",
+    "tier": "Apply",
+    "question": "What is wrong with this claim? 'The peace accords brought peace inside Angola.'",
+    "options": [
+      "Fighting inside Angola carried on for many years afterwards",
+      "The accords were never actually signed by any party",
+      "The accords dealt only with Cuban troops and nothing else",
+      "Namibia remained under South African rule after the accords"
+    ],
+    "correct": 0,
+    "explanation": "Fighting inside Angola carried on for years afterwards. The accords settled the regional and Cold War dimension, and you should keep that apart from the civil war. Option {opt3} is wrong: Namibia became independent in 1990."
+  },
+  {
+    "id": 18,
+    "slot": 18,
+    "section": "Cuito Cuanavale and after",
+    "tier": "Apply",
+    "question": "What is wrong with this reasoning? 'Because the two accounts of Cuito Cuanavale conflict, neither is reliable.'",
+    "options": [
+      "Each is reliable evidence of the position its author held",
+      "Conflicting accounts are always equally unreliable as historical evidence",
+      "The accounts do not actually conflict in any way",
+      "Reliability depends only on when a source was first written"
+    ],
+    "correct": 0,
+    "explanation": "A source arguing a case is still solid evidence of what that case was and who made it. You're better off saying what each one is good for than dismissing both. Option {opt1} sounds cautious and even-handed, which is exactly why it costs you."
+  }
+];
+
+const TIER_MAP = {
+  Recall: { cls: 'chip-recall', label: 'Recall' },
+  Understand: { cls: 'chip-understand', label: 'Understand' },
+  Apply: { cls: 'chip-apply', label: 'Apply' }
+};
+const LEVELS = ['Recall','Understand','Apply'];
+
+// MODE is baked at build time: 'a' = Check 1 (before), 'b' = Check 2 (after).
+const IS_AFTER = (typeof MODE !== 'undefined' && MODE === 'b');
+
+// Read an optional prior score passed by the platform: ?prior=N
+function priorScore(){
+  try {
+    const p = new URLSearchParams(window.location.search).get('prior');
+    if(p === null) return null;
+    const n = parseInt(p, 10);
+    return (Number.isFinite(n) && n >= 0 && n <= 18) ? n : null;
+  } catch(e){ return null; }
+}
+
+// Intro copy differs by sitting.
+document.getElementById('intro-body').textContent = INTRO;
+
+const state = { filter: 'all', list: [], current: 0, answers: {}, order: {} };
+
+const menu = document.getElementById('menu-screen');
+const quiz = document.getElementById('quiz-screen');
+const review = document.getElementById('review-screen');
+
+function roman(n){ const m=[[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']]; let r=''; for(const [v,s] of m){ while(n>=v){ r+=s; n-=v; } } return r; }
+
+function buildMenu(){
+  const list = document.getElementById('section-list');
+  list.innerHTML = '';
+  SECTIONS.forEach((sec, i) => {
+    const count = QUESTIONS.filter(q => q.section === sec).length;
+    const btn = document.createElement('button');
+    btn.className = 'section-btn';
+    btn.innerHTML = `<span class="section-roman">${roman(i+2)}.</span><span class="section-name">${sec}</span><span class="section-count">${count} Q</span>`;
+    btn.addEventListener('click', () => startQuiz(sec));
+    list.appendChild(btn);
+  });
+  document.querySelector('[data-filter="all"]').addEventListener('click', () => startQuiz('all'));
+}
+
+function startQuiz(filter){
+  state.filter = filter;
+  state.list = filter === 'all' ? QUESTIONS.slice() : QUESTIONS.filter(q => q.section === filter);
+  state.current = 0; state.answers = {}; state.order = {};
+  menu.classList.add('hidden'); review.classList.add('hidden'); quiz.classList.remove('hidden');
+  renderQuestion();
+}
+
+// Resolve {optN} tokens to the letter that content-option N carries after shuffling.
+// Returns plain text (letters only), so textContent stays safe.
+function resolveOpts(text, order){
+  if(!text) return text;
+  return text.replace(/\{opt(\d+)\}/g, (m, n) => {
+    const displayPos = order.indexOf(parseInt(n, 10));
+    return displayPos >= 0 ? String.fromCharCode(65 + displayPos) : m;
+  });
+}
+
+function shuffledOrder(q){
+  if(!state.order[q.id]){
+    const arr = q.options.map((_,i)=>i);
+    for(let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); const t=arr[i]; arr[i]=arr[j]; arr[j]=t; }
+    state.order[q.id]=arr;
+  }
+  return state.order[q.id];
+}
+
+function renderQuestion(){
+  const q = state.list[state.current];
+  const answered = state.answers[q.id] !== undefined;
+  const diff = TIER_MAP[q.tier];
+  document.getElementById('quiz-section-name').textContent = state.filter === 'all' ? 'Full test' : q.section;
+  document.getElementById('quiz-progress').textContent = `Question ${state.current+1} of ${state.list.length}`;
+  document.getElementById('progress-fill').style.width = ((state.current+1)/state.list.length*100)+'%';
+  document.getElementById('section-tag').textContent = q.section;
+  const chip = document.getElementById('difficulty-chip');
+  chip.className = 'chip ' + diff.cls; chip.textContent = diff.label;
+  document.getElementById('question-text').textContent = q.question;
+
+  const order = shuffledOrder(q);
+  const cont = document.getElementById('options-container');
+  cont.innerHTML = '';
+  order.forEach((orig, pos) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    let mark = '';
+    if(answered){
+      btn.disabled = true;
+      if(orig === q.correct){ btn.classList.add('correct'); mark = '<span class="opt-mark">&#10003;</span>'; }
+      else if(orig === state.answers[q.id]){ btn.classList.add('wrong'); mark = '<span class="opt-mark">&#10007;</span>'; }
+      else btn.classList.add('dimmed');
+    }
+    btn.innerHTML = `<span class="opt-letter">${String.fromCharCode(65+pos)}</span><span class="opt-text">${q.options[orig]}</span>${mark}`;
+    if(!answered){ btn.addEventListener('click', () => { state.answers[q.id] = orig; renderQuestion(); }); }
+    cont.appendChild(btn);
+  });
+
+  const expl = document.getElementById('explanation');
+  if(answered){
+    expl.classList.remove('hidden');
+    document.getElementById('expl-text').textContent = resolveOpts(q.explanation, order);
+  }
+  else expl.classList.add('hidden');
+
+  // Back always does something: a step back inside the test, and from the first
+  // question it returns to the menu rather than sitting there dead.
+  const prevBtn = document.getElementById('prev-btn');
+  const atStart = state.current === 0;
+  prevBtn.disabled = false;
+  prevBtn.style.visibility = 'visible';
+  prevBtn.innerHTML = atStart ? '&larr; Back to menu' : '&larr; Previous';
+  const action = document.getElementById('action-btn');
+  action.textContent = state.current === state.list.length - 1 ? 'See results' : 'Next question';
+  action.disabled = !answered;
+
+  let got = 0, done = 0;
+  state.list.forEach(x => { if(state.answers[x.id] !== undefined){ done++; if(state.answers[x.id]===x.correct) got++; } });
+  document.getElementById('score-tally').textContent = `Score so far: ${got} / ${done}`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+document.getElementById('action-btn').addEventListener('click', () => {
+  if(state.current < state.list.length - 1){ state.current++; renderQuestion(); }
+  else showReview();
+});
+document.getElementById('prev-btn').addEventListener('click', () => {
+  if(state.current>0){ state.current--; renderQuestion(); }
+  else { document.getElementById('quiz-screen').classList.add('hidden');
+         document.getElementById('menu-screen').classList.remove('hidden');
+         window.scrollTo({top:0,behavior:'smooth'}); }
+});
+document.getElementById('exit-btn').addEventListener('click', () => { quiz.classList.add('hidden'); menu.classList.remove('hidden'); });
+document.getElementById('restart-btn').addEventListener('click', () => { review.classList.add('hidden'); menu.classList.remove('hidden'); });
+
+function weakestSection(){
+  let worst = SECTIONS[0], worstPct = 2;
+  SECTIONS.forEach(sec => {
+    const qs = state.list.filter(q => q.section === sec);
+    if(!qs.length) return;
+    const got = qs.filter(q => state.answers[q.id] === q.correct).length;
+    const p = got/qs.length;
+    if(p < worstPct){ worstPct = p; worst = sec; }
+  });
+  return worst;
+}
+
+function showReview(){
+  quiz.classList.add('hidden'); review.classList.remove('hidden');
+  const total = state.list.length;
+  let correct = 0;
+  state.list.forEach(q => { if(state.answers[q.id] === q.correct) correct++; });
+  const pct = total ? Math.round(correct/total*100) : 0;
+  document.getElementById('score-correct').textContent = correct;
+  document.getElementById('score-total').textContent = total;
+  document.getElementById('score-percent').textContent = pct;
+
+  // Word bands, not letters. Copy differs by sitting.
+  let band='', desc='';
+  const weakest = weakestSection();
+  if(IS_AFTER){
+    if(pct>=85){ band='Excellent'; desc='The facts have stuck. Your last step is to write the essay question out under timed conditions: one hour, three pages.'; }
+    else if(pct>=70){ band='Strong'; desc='Strong recall after the lessons. Look again at anything you missed, then write the essay out under time.'; }
+    else if(pct>=55){ band='Solid'; desc='A solid base. Your weakest area was ' + weakest + '. Go back to the lesson that covers it, then try the timed essay.'; }
+    else if(pct>=40){ band='Patchy'; desc='Some of it has stuck and some has not. Your weakest area was ' + weakest + '. Revisit that lesson, then take this again.'; }
+    else { band='Start again'; desc='The facts have not settled yet. Go back to the lessons, starting with ' + weakest + ', and work through them again before the exam.'; }
+  } else {
+    if(pct>=85){ band='Excellent'; desc='A strong start even before the lessons. Go to Lesson 1 and start turning these facts into an argument.'; }
+    else if(pct>=70){ band='Strong'; desc='You already know a lot of this. Go to Lesson 1, where you learn to use it.'; }
+    else if(pct>=55){ band='Solid'; desc='A decent base to build on. Go to Lesson 1 and start building the argument.'; }
+    else if(pct>=40){ band='Patchy'; desc='A normal starting point before studying a topic. Go to Lesson 1: that is exactly what it is for.'; }
+    else { band='Just starting'; desc='A low score before you have studied a topic is the normal place to begin, not a warning. Go straight to Lesson 1.'; }
+  }
+  document.getElementById('score-grade').textContent = band;
+  document.getElementById('grade-desc').textContent = desc;
+
+  // Check 1 tells the learner to note the score. Check 2 shows the comparison if we have it.
+  const cmp = document.getElementById('compare-line');
+  if(IS_AFTER){
+    const prior = priorScore();
+    if(prior !== null && state.filter === 'all'){
+      const diff = correct - prior;
+      const move = diff > 0 ? ('up ' + diff) : (diff < 0 ? ('down ' + (-diff)) : 'the same');
+      cmp.textContent = 'Before the lessons: ' + prior + ' out of 18. Now: ' + correct + ' out of 18. That is ' + move + '.';
+      cmp.classList.remove('hidden');
+    } else {
+      cmp.classList.add('hidden');
+    }
+  } else {
+    cmp.textContent = 'Write this score down. When you finish Lesson 5, the second check will compare against it.';
+    cmp.classList.remove('hidden');
+  }
+
+  const levelRows = document.getElementById('level-rows'); levelRows.innerHTML = '';
+  LEVELS.forEach(level => {
+    const qs = state.list.filter(q => q.tier === level);
+    if(!qs.length) return;
+    const got = qs.filter(q => state.answers[q.id] === q.correct).length;
+    const p = Math.round(got/qs.length*100);
+    levelRows.innerHTML += `<div class="breakdown-row"><div class="breakdown-name">${level}</div><div class="breakdown-bar"><div class="breakdown-fill" style="width:${p}%"></div></div><div class="breakdown-score">${got}/${qs.length}</div></div>`;
+  });
+
+  const rows = document.getElementById('breakdown-rows'); rows.innerHTML = '';
+  SECTIONS.forEach(sec => {
+    const qs = state.list.filter(q => q.section === sec);
+    if(!qs.length) return;
+    const got = qs.filter(q => state.answers[q.id] === q.correct).length;
+    const p = Math.round(got/qs.length*100);
+    rows.innerHTML += `<div class="breakdown-row"><div class="breakdown-name">${sec}</div><div class="breakdown-bar"><div class="breakdown-fill" style="width:${p}%"></div></div><div class="breakdown-score">${got}/${qs.length}</div></div>`;
+  });
+
+  const cards = document.getElementById('review-cards'); cards.innerHTML = '';
+  state.list.forEach((q, i) => {
+    const your = state.answers[q.id];
+    const right = your === q.correct;
+    const card = document.createElement('div');
+    card.className = 'review-card ' + (right ? 'got' : 'missed');
+    let inner = `<div class="review-q">${i+1}. ${q.question}</div>`;
+    if(right){
+      inner += `<div class="review-a right"><span class="lab">Correct:</span> ${q.options[q.correct]}</div>`;
+    } else {
+      inner += `<div class="review-a yours-wrong"><span class="lab">Your answer:</span> ${your!==undefined ? q.options[your] : 'not answered'}</div>`;
+      inner += `<div class="review-a right"><span class="lab">Correct:</span> ${q.options[q.correct]}</div>`;
+    }
+    card.innerHTML = inner;
+    cards.appendChild(card);
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+buildMenu();
+})();
+
+
+/* ---- MODE TOGGLE ---------------------------------------------------------
+   Injects its own button so there is no stray markup, and lives inside the
+   single script block so a first-to-last script extraction still parses. */
+(function(){
+  var NATIVE = "light";
+  try{ if(localStorage.getItem("kula-mode")==="alt"){ document.body.classList.add("alt"); } }catch(e){}
+  var SUN='<circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/>';
+  var MOON='<path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/>';
+  var b=document.getElementById("mode-toggle");
+  if(!b){
+    b=document.createElement("button");
+    b.className="mode-toggle"; b.id="mode-toggle"; b.type="button";
+    b.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true" id="mode-icon"></svg><span id="mode-label"></span>';
+    document.body.appendChild(b);
+  }
+  var lab=document.getElementById("mode-label"), ic=document.getElementById("mode-icon");
+  function paint(){
+    var onAlt=document.body.classList.contains("alt");
+    var showing = onAlt ? (NATIVE==="dark" ? "light" : "dark") : NATIVE;
+    var offering = showing==="dark" ? "light" : "dark";
+    lab.textContent = offering==="light" ? "Light Mode" : "Dark Mode";
+    ic.innerHTML = offering==="light" ? SUN : MOON;
+    b.setAttribute("aria-pressed", onAlt ? "true" : "false");
+    b.setAttribute("aria-label", "Switch to " + offering + " mode");
+  }
+  b.addEventListener("click",function(){
+    var onAlt=document.body.classList.toggle("alt");
+    try{ localStorage.setItem("kula-mode", onAlt ? "alt" : "native"); }catch(e){}
+    paint();
+  });
+  paint();
+})();
+</script>
+</body>
+</html>
