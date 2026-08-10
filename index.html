@@ -32,8 +32,8 @@
     --a1: #B4622D;   --a1-rgb: 180,98,45;
     --a2: #1F6B58;   --a2-rgb: 31,107,88;
     --serif: Georgia, 'Times New Roman', serif;
-    --sans:  system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    --mono:  var(--sans);
+    --sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --mono: ui-monospace, 'Cascadia Code', Consolas, 'Courier New', monospace;
 
     /* ---- DERIVED TOKENS. A skin should not need to touch these. ----
        They exist because the engine used to hardcode fourteen literal
@@ -150,9 +150,9 @@
   --a1: #9C3D2E;  --a1-rgb: 156,61,46;
   --a2: #24565C;  --a2-rgb: 36,86,92;
   /* type: a transitional serif for the history, mono for anything with a symbol */
-  --serif: 'Source Serif 4', 'Charter', Georgia, serif;
-  --sans:  'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
-  --mono:  'IBM Plex Mono', ui-monospace, Consolas, monospace;
+  --serif: Georgia, 'Times New Roman', serif;
+  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --mono: ui-monospace, 'Cascadia Code', Consolas, 'Courier New', monospace;
 }
 
 /* Flat ground. Ore Seam layers two warm radial washes; this one is a cold
@@ -470,6 +470,22 @@ body.alt .figure img { filter: brightness(0.9) contrast(1.02); }
   .review-actions { margin-top: 1.6rem; }
   .hidden { display: none !important; }
 
+
+  /* v2.1 finish pop-up, matched to the lesson engine so a learner meets the
+     same closing screen in all seven files of a unit. */
+  .pop-back { position: fixed; inset: 0; background: var(--scrim); display: flex;
+    align-items: center; justify-content: center; padding: 1.2rem; z-index: 90; }
+  .pop { background: var(--paper); border: 1px solid var(--hair); max-width: 26rem;
+    width: 100%; padding: 1.4rem 1.3rem; text-align: center; }
+  .pop-label { font-family: var(--sans); font-size: 0.62rem; letter-spacing: 0.15em;
+    text-transform: uppercase; font-weight: 700; color: var(--a1); }
+  .pop-text { font-size: 0.95rem; line-height: 1.6; color: var(--ink); margin: 0.5rem 0 1.1rem; }
+  .pop-btn { font-family: var(--sans); font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.09em; text-transform: uppercase; min-height: 44px; padding: 0.6rem 1.4rem;
+    cursor: pointer; background: transparent; color: var(--muted);
+    border: 1px solid var(--hair); border-radius: 0; }
+  .review-actions { display: grid; gap: 0.7rem; }
+
 </style>
 </head>
 <body>
@@ -545,6 +561,7 @@ body.alt .figure img { filter: brightness(0.9) contrast(1.02); }
     <div><div class="review-all-label">Every question</div><div id="review-cards"></div></div>
     <div class="review-actions">
       <button class="primary-btn" id="restart-btn"><span class="btn-txt"><span class="btn-title">Return to menu</span><span class="btn-sub">Try another section or retake the full test</span></span><span class="btn-arrow">&#8635;</span></button>
+      <button class="primary-btn" id="finish-btn"><span class="btn-txt"><span class="btn-title">Finish</span><span class="btn-sub">Then tap Done to finish</span></span><span class="btn-arrow">&rarr;</span></button>
     </div>
   </div>
 </div>
@@ -555,6 +572,9 @@ body.alt .figure img { filter: brightness(0.9) contrast(1.02); }
    redeclaration SyntaxError. */
 (function(){
 const MODE = "b";
+const DONE_LABEL = "Unit complete";
+const DONE_TITLE = "What Stuck";
+const DONE_TEXT  = "Congratulations on completing Independent Africa: Angola. Come back here whenever you need to revise for a test or exam.";
 const INTRO = "The same eighteen facts as the first check, asked from the other direction, so remembering the shape of the earlier questions will not help you. You have done the lessons now. This is about what is still there.";
 const SECTIONS = [
   "Portugal holds on",
@@ -973,6 +993,21 @@ document.getElementById('prev-btn').addEventListener('click', () => {
 });
 document.getElementById('exit-btn').addEventListener('click', () => { quiz.classList.add('hidden'); menu.classList.remove('hidden'); });
 document.getElementById('restart-btn').addEventListener('click', () => { review.classList.add('hidden'); menu.classList.remove('hidden'); });
+
+/* v2.1. Every file in a unit now ends the same way: Finish, then a pop-up whose
+   only job is to tell the learner to tap the platform's Done control. The four
+   knowledge checks previously ended on the results screen with no instruction,
+   so two files in every seven closed differently from the other five. */
+document.getElementById('finish-btn').addEventListener('click', () => {
+  const back = document.createElement('div');
+  back.className = 'pop-back';
+  back.innerHTML = '<div class="pop"><div class="pop-label">' + DONE_LABEL +
+    '</div><h3 style="margin:.4rem 0 .2rem;font-size:1.05rem;">' + DONE_TITLE +
+    '</h3><div class="pop-text">' + DONE_TEXT +
+    '</div><button class="pop-btn" id="fin-ok">Done</button></div>';
+  document.body.appendChild(back);
+  document.getElementById('fin-ok').addEventListener('click', () => back.remove());
+});
 
 function weakestSection(){
   let worst = SECTIONS[0], worstPct = 2;
