@@ -66,12 +66,12 @@
   }
 
   /* ---- DARK MODE TOKEN RE-POINT ---------------------------------------
-     The skin supplies body.alt values for the thirteen identity variables.
+     The skin supplies body.dark values for the thirteen identity variables.
      Everything derived re-points here, once, for every unit. This is the
      engine-level fix for the three defects logged in MOBILE_FIXES_HANDOVER:
      a skin no longer needs the patch block at all.
      ------------------------------------------------------------------- */
-  body.alt {
+  body.dark {
     --muted:      var(--fade);
     --hair:       rgba(255,255,255,0.14);
     --hair-strong:rgba(255,255,255,0.26);
@@ -89,11 +89,9 @@
     --inset:  rgba(255,255,255,0.05);
   }
   /* Key term chips keep a visible edge once the ground inverts. */
-  body.alt .kt-term { border-color: var(--hair-strong); }
-  body.alt .kt-term summary { color: var(--ink); }
-  body.alt .kt-label { border-top-color: var(--hair-strong); }
-  /* v2 dimmed the options a learner did not pick; at 0.45 they vanish on a dark ground. */
-  body.alt .option.dimmed, body.alt .option-btn.dimmed { opacity: 0.72; }
+  body.dark .kt-term { border-color: var(--hair-strong); }
+  body.dark .kt-term summary { color: var(--ink); }
+  body.dark .kt-label { border-top-color: var(--hair-strong); }
 
   /* ---- MODE TOGGLE. Fixed bottom right, 44px minimum tap target. ---- */
   .mode-toggle {
@@ -144,11 +142,19 @@
   --paper: #F7F8F6;   /* cards */
   --cut:   #EDF0EE;   /* insets, sources, carousels */
   --ink:   #1A2327;   /* body text */
-  --clay:  #5C6B73;   /* stage tags, quiet labels: steel, not terracotta */
-  --fade:  #79858B;   /* muted text, captions */
+  /* Stage tags and quiet labels. Was #5C6B73, which cleared 4.5 on a card but
+     measured 4.43 on the --sand page ground, where the eyebrows actually sit. */
+  --clay:  #55636B;   /* stage tags, quiet labels: steel, not terracotta */
+  /* Muted text: captions, attributions, the question counter, the running tally.
+     The previous value measured 3.04 against the grounds it actually sits on. */
+  --fade:  #5C666E;   /* muted text, captions */
   /* accents: brick red for the argued line, deep teal for the settled one */
   --a1: #9C3D2E;  --a1-rgb: 156,61,46;
   --a2: #24565C;  --a2-rgb: 36,86,92;
+  /* The two hover steps are derived, not identity. Left in the engine block they
+     kept the engine's bottle green against this skin's deep teal. */
+  --ink-deep: #13191C;
+  --a2-deep:  #1A3E42;
   /* type: a transitional serif for the history, mono for anything with a symbol */
   --serif: Georgia, 'Times New Roman', serif;
   --sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -227,32 +233,37 @@ body {
 
 /* Dark mode. The slate ground goes to deep ink and the papers to a cold
    charcoal, so the chamber reads as the same room after hours. */
-body.alt {
+body.dark {
   --sand:  #141A1D;
   --paper: #1D2529;
   --cut:   #232C31;
   --ink:   #E6EBEA;
   --clay:  #93A3AB;
   --fade:  #8B979D;
-  --a1: #D0664F;  --a1-rgb: 208,102,79;
+  /* Was #D0664F: 4.37 on the card and 3.86 on the --cut insets, where the option
+     letters, the rank numbers and the source attributions sit. */
+  --a1: #E0836E;  --a1-rgb: 224,131,110;
   --a2: #58A6A2;  --a2-rgb: 88,166,162;
+  /* On a dark ground a hover step goes lighter, not deeper. */
+  --ink-deep: #FFFFFF;
+  --a2-deep:  #7CBFBB;
 }
-body.alt { background-image:
+body.dark { background-image:
   repeating-linear-gradient(90deg, transparent 0 38px, rgba(230,235,234,0.035) 38px 39px) !important; }
-body.alt .card, body.alt .source, body.alt .stat-wrap,
-body.alt .carousel, body.alt .kt { border-color: rgba(88,166,162,0.28) !important; }
-body.alt .btn-begin { border-color: var(--ink) !important; color: var(--ink) !important; }
-body.alt .btn-begin:hover { background: var(--ink) !important; color: var(--sand) !important; }
-body.alt .mode-toggle { background: var(--paper); border-color: rgba(230,235,234,0.24); }
+body.dark .card, body.dark .source, body.dark .stat-wrap,
+body.dark .carousel, body.dark .kt { border-color: rgba(88,166,162,0.28) !important; }
+body.dark .btn-begin { border-color: var(--ink) !important; color: var(--ink) !important; }
+body.dark .btn-begin:hover { background: var(--ink) !important; color: var(--sand) !important; }
+body.dark .mode-toggle { background: var(--paper); border-color: rgba(230,235,234,0.24); }
 
 /* The RECALL chip keeps its light background in dark mode, so it glares.
    Tier chips get dark-mode grounds of their own. */
-body.alt .chip { background: rgba(88,166,162,0.16) !important; color: #BFE0DD !important; }
-body.alt .chip-recall,  body.alt .chip-extract   { background: rgba(208,102,79,0.20) !important; color: #F0BAAB !important; }
-body.alt .chip-understand, body.alt .chip-interpret { background: rgba(88,166,162,0.18) !important; color: #B7DEDA !important; }
-body.alt .chip-apply,   body.alt .chip-evaluate  { background: rgba(230,235,234,0.16) !important; color: #E6EBEA !important; }
+body.dark .chip { background: rgba(88,166,162,0.16) !important; color: #BFE0DD !important; }
+body.dark .chip-recall,  body.dark .chip-extract   { background: rgba(208,102,79,0.20) !important; color: #F0BAAB !important; }
+body.dark .chip-understand, body.dark .chip-interpret { background: rgba(88,166,162,0.18) !important; color: #B7DEDA !important; }
+body.dark .chip-apply,   body.dark .chip-evaluate  { background: rgba(230,235,234,0.16) !important; color: #E6EBEA !important; }
 /* Options need a visible edge against the charcoal card. */
-body.alt .option-btn, body.alt .opt-btn { border-color: rgba(230,235,234,0.20) !important; }
+body.dark .option-btn, body.dark .opt-btn { border-color: rgba(230,235,234,0.20) !important; }
 
 
 /* ---- DARK MODE STATE COLOURS -----------------------------------------------
@@ -260,68 +271,66 @@ body.alt .option-btn, body.alt .opt-btn { border-color: rgba(230,235,234,0.20) !
    Left alone they produce pale text on pale grounds. */
 
 /* Answer states: dark grounds with a coloured edge, text stays --ink. */
-body.alt .option-btn.correct {
+body.dark .option-btn.correct {
   background: rgba(88,166,162,0.16) !important;
   border-color: #58A6A2 !important;
   color: var(--ink) !important;
 }
-body.alt .option-btn.wrong {
+body.dark .option-btn.wrong {
   background: rgba(208,102,79,0.16) !important;
   border-color: #D0664F !important;
   color: var(--ink) !important;
 }
-body.alt .option-btn.correct .opt-text,
-body.alt .option-btn.wrong   .opt-text { color: var(--ink) !important; }
-body.alt .option-btn.correct .opt-letter { color: #7FC7C2 !important; }
-body.alt .option-btn.wrong   .opt-letter { color: #E89A87 !important; }
-body.alt .opt-mark { color: var(--ink) !important; }
+body.dark .option-btn.correct .opt-text,
+body.dark .option-btn.wrong   .opt-text { color: var(--ink) !important; }
+body.dark .option-btn.correct .opt-letter { color: #7FC7C2 !important; }
+body.dark .option-btn.wrong   .opt-letter { color: #E89A87 !important; }
+body.dark .opt-mark { color: var(--ink) !important; }
 /* v2 dims the options a learner did not pick; at 0.45 on a dark ground they vanish. */
-body.alt .option-btn.dimmed { opacity: 0.72 !important; }
 
 /* The full-check button is dark-on-dark once the ground inverts. */
-body.alt .primary-btn {
+body.dark .primary-btn {
   background: var(--cut) !important;
   border: 1px solid rgba(88,166,162,0.40) !important;
   color: var(--ink) !important;
 }
-body.alt .primary-btn:hover { background: #2B363C !important; }
-body.alt .primary-btn .btn-title { color: var(--ink) !important; }
-body.alt .primary-btn .btn-sub,
-body.alt .primary-btn .btn-arrow { color: var(--clay) !important; }
+body.dark .primary-btn:hover { background: #2B363C !important; }
+body.dark .primary-btn .btn-title { color: var(--ink) !important; }
+body.dark .primary-btn .btn-sub,
+body.dark .primary-btn .btn-arrow { color: var(--clay) !important; }
 
 /* Section rows and the small action button. */
-body.alt .section-btn { border-color: rgba(230,235,234,0.18) !important; color: var(--ink) !important; }
-body.alt .section-btn:hover { background: var(--cut) !important; border-color: var(--a2) !important; }
-body.alt .primary-btn-small { background: var(--a2) !important; color: #0E1518 !important; }
-body.alt .primary-btn-small:hover:not(:disabled) { background: #6FBCB7 !important; }
-body.alt .secondary-btn { border-color: rgba(230,235,234,0.30) !important; color: var(--ink) !important; }
-body.alt .secondary-btn:hover:not(:disabled) { background: var(--cut) !important; }
+body.dark .section-btn { border-color: rgba(230,235,234,0.18) !important; color: var(--ink) !important; }
+body.dark .section-btn:hover { background: var(--cut) !important; border-color: var(--a2) !important; }
+body.dark .primary-btn-small { background: var(--a2) !important; color: #0E1518 !important; }
+body.dark .primary-btn-small:hover:not(:disabled) { background: #6FBCB7 !important; }
+body.dark .secondary-btn { border-color: rgba(230,235,234,0.30) !important; color: var(--ink) !important; }
+body.dark .secondary-btn:hover:not(:disabled) { background: var(--cut) !important; }
 
 /* The explanation panel and the quiz footer links. */
-body.alt .explanation { background: var(--cut) !important; border-color: rgba(88,166,162,0.28) !important; }
-body.alt .expl-text { color: var(--ink) !important; }
-body.alt .quiz-foot a, body.alt .quiz-foot { color: var(--clay) !important; }
+body.dark .explanation { background: var(--cut) !important; border-color: rgba(88,166,162,0.28) !important; }
+body.dark .expl-text { color: var(--ink) !important; }
+body.dark .quiz-foot a, body.dark .quiz-foot { color: var(--clay) !important; }
 
 
 /* The lesson engine uses .option where the quiz uses .option-btn, so the
    state overrides have to name both or half the product stays broken. */
-body.alt .option { background: var(--cut) !important; border-color: rgba(230,235,234,0.18) !important; color: var(--ink) !important; }
-body.alt .option.selected { background: rgba(208,102,79,0.14) !important; border-color: #D0664F !important; }
-body.alt .option.correct {
+body.dark .option { background: var(--cut) !important; border-color: rgba(230,235,234,0.18) !important; color: var(--ink) !important; }
+body.dark .option.selected { background: rgba(208,102,79,0.14) !important; border-color: #D0664F !important; }
+body.dark .option.correct {
   background: rgba(88,166,162,0.16) !important;
   border-color: #58A6A2 !important;
   color: var(--ink) !important;
 }
-body.alt .option.wrong {
+body.dark .option.wrong {
   background: rgba(208,102,79,0.16) !important;
   border-color: #D0664F !important;
   color: var(--ink) !important;
 }
-body.alt .option.correct .opt-text,
-body.alt .option.wrong   .opt-text { color: var(--ink) !important; }
-body.alt .option.correct .opt-letter { color: #7FC7C2 !important; }
-body.alt .option.wrong   .opt-letter { color: #E89A87 !important; }
-body.alt .option.dimmed { opacity: 0.72 !important; }
+body.dark .option.correct .opt-text,
+body.dark .option.wrong   .opt-text { color: var(--ink) !important; }
+body.dark .option.correct .opt-letter { color: #7FC7C2 !important; }
+body.dark .option.wrong   .opt-letter { color: #E89A87 !important; }
 
 
 /* The toggle is fixed bottom right and lands on the Continue button on a short
@@ -344,10 +353,10 @@ body { padding-bottom: 4.5rem !important; }
   padding-top: 0.6rem;
 }
 .figure img { border: 1px solid rgba(36,86,92,0.30) !important; }
-body.alt .figure img { border-color: rgba(88,166,162,0.30) !important; }
-body.alt .figure figcaption { border-top-color: rgba(88,166,162,0.24); }
+body.dark .figure img { border-color: rgba(88,166,162,0.30) !important; }
+body.dark .figure figcaption { border-top-color: rgba(88,166,162,0.24); }
 /* An archival photograph should not glare against the dark ground. */
-body.alt .figure img { filter: brightness(0.9) contrast(1.02); }
+body.dark .figure img { filter: brightness(0.9) contrast(1.02); }
 
 
 
@@ -397,8 +406,10 @@ body.alt .figure img { filter: brightness(0.9) contrast(1.02); }
   .btn-num { font-family: var(--sans); font-size: 1.4rem; color: var(--a1); font-weight: 800; min-width: 35px; }
   .btn-txt { flex: 1; display: flex; flex-direction: column; gap: 0.2rem; }
   .btn-title { font-family: var(--sans); font-size: 1.15rem; font-weight: 700; }
-  .btn-sub { font-family: var(--sans); font-size: 0.82rem; color: var(--muted); }
-  .btn-arrow { font-size: 1.3rem; color: var(--a1); }
+  /* These sit inside .primary-btn, whose light ground is --ink, so they take
+     --on-ink. On --muted and --a1 they were paper colours on near-black. */
+  .btn-sub { font-family: var(--sans); font-size: 0.82rem; color: var(--on-ink); opacity: 0.92; }
+  .btn-arrow { font-size: 1.3rem; color: var(--on-ink); }
   .section-list { display: flex; flex-direction: column; gap: 0.5rem; }
   .section-btn { display: flex; align-items: center; gap: 1rem; padding: 0.95rem 1.1rem; background: transparent; border: 1px solid var(--hair-strong); cursor: pointer; font-family: inherit; text-align: left; transition: all 0.2s; color: var(--ink); }
   .section-btn:hover { background: var(--paper); border-color: var(--a1); }
@@ -423,8 +434,10 @@ body.alt .figure img { filter: brightness(0.9) contrast(1.02); }
   .option-btn.selected { background: var(--cut); border-color: var(--a1); border-width: 2px; padding: 0.94rem 0.99rem; }
   .option-btn.correct { background: var(--ok-bg); border-color: var(--a2); border-width: 2px; padding: 0.94rem 0.99rem; }
   .option-btn.wrong { background: var(--no-bg); border-color: var(--clay); border-width: 2px; padding: 0.94rem 0.99rem; }
-  .option-btn.dimmed { opacity: 0.48; }
-  body.alt .option-btn.dimmed { opacity: 0.72; }
+  /* The dimmed state fell below readable contrast at 360px. One rule per mode,
+     and nothing later in the file competes with it. */
+  .option.dimmed, .option-btn.dimmed { opacity: 0.82; }
+  body.dark .option.dimmed, body.dark .option-btn.dimmed { opacity: 0.86; }
   .opt-letter { font-weight: 800; color: var(--a1); min-width: 1.1rem; }
   .opt-text { flex: 1; }
   .opt-mark { font-weight: 700; font-size: 1.1rem; }
@@ -471,16 +484,6 @@ body.alt .figure img { filter: brightness(0.9) contrast(1.02); }
   .hidden { display: none !important; }
 
 
-  /* v2.1 finish pop-up, matched to the lesson engine so a learner meets the
-     same closing screen in all seven files of a unit. */
-  .pop-back { position: fixed; inset: 0; background: var(--scrim); display: flex;
-    align-items: center; justify-content: center; padding: 1.2rem; z-index: 90; }
-  .pop { background: var(--paper); border: 1px solid var(--hair); max-width: 26rem;
-    width: 100%; padding: 1.4rem 1.3rem; text-align: center; }
-  .pop-label { font-family: var(--sans); font-size: 0.62rem; letter-spacing: 0.15em;
-    text-transform: uppercase; font-weight: 700; color: var(--a1); }
-  .pop-text { font-size: 0.95rem; line-height: 1.6; color: var(--ink); margin: 0.5rem 0 1.1rem; }
-  .pop-btn { font-family: var(--sans); font-size: 0.78rem; font-weight: 700;
     letter-spacing: 0.09em; text-transform: uppercase; min-height: 44px; padding: 0.6rem 1.4rem;
     cursor: pointer; background: transparent; color: var(--muted);
     border: 1px solid var(--hair); border-radius: 0; }
@@ -559,22 +562,39 @@ body.alt .figure img { filter: brightness(0.9) contrast(1.02); }
     <div class="breakdown"><div class="breakdown-label">By tier</div><div id="level-rows"></div></div>
     <div class="breakdown"><div class="breakdown-label">By section</div><div id="breakdown-rows"></div></div>
     <div><div class="review-all-label">Every question</div><div id="review-cards"></div></div>
+    <p class="grade-desc hidden" id="closing-line"></p>
     <div class="review-actions">
       <button class="primary-btn" id="restart-btn"><span class="btn-txt"><span class="btn-title">Return to menu</span><span class="btn-sub">Try another section or retake the full test</span></span><span class="btn-arrow">&#8635;</span></button>
-      <button class="primary-btn" id="finish-btn"><span class="btn-txt"><span class="btn-title">Finish</span><span class="btn-sub">Then tap Done to finish</span></span><span class="btn-arrow">&rarr;</span></button>
+      <button class="primary-btn" id="finish-btn"><span class="btn-txt"><span class="btn-title">Finish the unit</span><span class="btn-sub">Come back here whenever you need it</span></span><span class="btn-arrow">&rarr;</span></button>
     </div>
   </div>
 </div>
 
 <script>
+/* ---- LMS EMBED EVENTS ----------------------------------------------------
+   Two moments, deliberately separate. Reaching the closing screen marks the
+   activity done for progress tracking. Choosing to leave it advances. Firing
+   advance on arrival would pull the learner off their own results screen
+   before they had read it. ------------------------------------------------ */
+var KulaLMS = (function(){
+  var done = false;
+  function send(ev){
+    try{
+      window.parent.postMessage({ type: 'lms-embed-event', version: '1.0',
+        payload: { event: ev } }, '*');
+    }catch(e){}
+  }
+  return {
+    completed: function(){ if(done) return; done = true; send('completed'); },
+    advance:   function(){ send('advance'); }
+  };
+})();
 /* kula: re-entry guard. Every declaration below is function scoped, so a
    viewer that re-runs this script re-initialises instead of throwing a
    redeclaration SyntaxError. */
 (function(){
 const MODE = "b";
-const DONE_LABEL = "Unit complete";
-const DONE_TITLE = "What Stuck";
-const DONE_TEXT  = "Congratulations on completing Independent Africa: Angola. Come back here whenever you need to revise for a test or exam.";
+const CLOSING_TEXT = "Congratulations on completing Independent Africa: Angola. Come back here whenever you have a test or exam, or just need to consolidate your work.";
 const INTRO = "The same eighteen facts as the first check, asked from the other direction, so remembering the shape of the earlier questions will not help you. You have done the lessons now. This is about what is still there.";
 const SECTIONS = [
   "Portugal holds on",
@@ -593,7 +613,7 @@ const QUESTIONS = [
       "Benguela"
     ],
     "correct": 0,
-    "explanation": "Luanda, alongside the north. It's the capital, and it's the city the MPLA holds through 1975, so you'll meet it again. Option {opt2} is the oil enclave, which matters later for a different reason.",
+    "explanation": "Luanda, alongside the north. It is the capital, and it is the city the MPLA holds through 1975, so you will meet it again. Option {opt2} is the oil enclave, which matters later for a different reason.",
     "id": 1,
     "slot": 1,
     "section": "Portugal holds on",
@@ -608,7 +628,7 @@ const QUESTIONS = [
       "Mario Soares"
     ],
     "correct": 0,
-    "explanation": "Caetano headed the government the officers removed. Salazar's the common slip and some textbooks print it, but he'd had a stroke in 1968 and died in 1970. So writing Salazar into a 1974 answer puts you six years out.",
+    "explanation": "Caetano headed the government the officers removed. Salazar is the common slip and some textbooks print it, but he had had a stroke in 1968 and died in 1970. So writing Salazar into a 1974 answer puts you six years out.",
     "id": 2,
     "slot": 2,
     "section": "Portugal holds on",
@@ -623,7 +643,7 @@ const QUESTIONS = [
       "It was expelled from all its trade agreements in Europe"
     ],
     "correct": 0,
-    "explanation": "Almost half the national budget by the early 1970s. That's the figure you quote when you're asked why the wars ended. Options {opt1} and {opt2} sound like plausible punishments, but neither happened.",
+    "explanation": "Almost half the national budget by the early 1970s. That is the figure you quote when you are asked why the wars ended. Options {opt1} and {opt2} sound like plausible punishments, but neither happened.",
     "id": 3,
     "slot": 3,
     "section": "Portugal holds on",
@@ -653,7 +673,7 @@ const QUESTIONS = [
       "The Mombasa Declaration"
     ],
     "correct": 0,
-    "explanation": "Alvor, signed January 1975. You'll be asked for two of its aims, so the name is worth holding. Option {opt1} is a real Angolan agreement, but from 1991.",
+    "explanation": "Alvor, signed January 1975. You will be asked for two of its aims, so the name is worth holding. Option {opt1} is a real Angolan agreement, but from 1991.",
     "id": 5,
     "slot": 5,
     "section": "Alvor and the three movements",
@@ -668,7 +688,7 @@ const QUESTIONS = [
       "The MFA"
     ],
     "correct": 0,
-    "explanation": "Savimbi led UNITA, backed first by China and later by the United States and South Africa. Holden Roberto led the FNLA, and those two names get swapped more than any other pair here. Tie each leader to whoever armed him and you will keep them apart. Option {opt3} is the Portuguese Armed Forces Movement, which is not an Angolan movement at all.",
+    "explanation": "Savimbi led UNITA. It was backed first by China, later by the United States and South Africa. Holden Roberto led the FNLA. Those two names get swapped more than any other pair here. Tie each leader to whoever armed him and you will keep them apart. Option {opt3} is the Portuguese Armed Forces Movement, which is not an Angolan movement at all.",
     "id": 6,
     "slot": 6,
     "section": "Alvor and the three movements",
@@ -683,7 +703,7 @@ const QUESTIONS = [
       "The Organisation of African Unity banned the elections"
     ],
     "correct": 0,
-    "explanation": "The elections Alvor promised were never held. That's what turns a decolonisation into a civil war, and it's the sentence you want. Option {opt1} assumes a vote that never took place.",
+    "explanation": "The elections Alvor promised were never held. That is what turns a decolonisation into a civil war, and it is the sentence you want. Option {opt1} assumes a vote that never took place.",
     "id": 7,
     "slot": 7,
     "section": "Alvor and the three movements",
@@ -698,7 +718,7 @@ const QUESTIONS = [
       "It collapsed in 1974, before the coup in Lisbon happened"
     ],
     "correct": 0,
-    "explanation": "Signed in January 1975, then broke down during the transition. The fighting comes after the signing, not instead of it. Option {opt3} puts the collapse before the coup that made the agreement possible, which you can rule out on the dates alone.",
+    "explanation": "Signed in January 1975, then broken during the transition. The fighting comes after the signing, not instead of it. Option {opt3} puts the collapse before the coup that made the agreement possible. You can rule that out on the dates alone.",
     "id": 8,
     "slot": 8,
     "section": "Alvor and the three movements",
@@ -713,7 +733,7 @@ const QUESTIONS = [
       "Portugal"
     ],
     "correct": 0,
-    "explanation": "China, alongside the United States. Leave China out and you've made Angola look like a straight superpower duel. Option {opt2} was on the opposite side, backing the MPLA.",
+    "explanation": "China, alongside the United States. Leave China out and you have made Angola look like a straight superpower duel. Option {opt2} was on the opposite side, backing the MPLA.",
     "id": 9,
     "slot": 9,
     "section": "The powers arrive",
@@ -728,7 +748,7 @@ const QUESTIONS = [
       "Food aid only"
     ],
     "correct": 0,
-    "explanation": "Instructors, in October. They train; a military unit fights. Cuba draws that line carefully, because you'll be asked which arrived first. Option {opt1} came from the Soviet Union, and later.",
+    "explanation": "Instructors, in October. Instructors train. A military unit fights. Cuba drew that line carefully, and you will be asked which arrived first. Option {opt1} came from the Soviet Union, and later.",
     "id": 10,
     "slot": 10,
     "section": "The powers arrive",
@@ -743,7 +763,7 @@ const QUESTIONS = [
       "It meant Cuba did not have to send any soldiers"
     ],
     "correct": 0,
-    "explanation": "An invitation lets Cuba present its role as solidarity rather than obedience. Option {opt2} confuses a request for help with a treaty obligation, and you'll want to keep those apart.",
+    "explanation": "An invitation lets Cuba call its role solidarity rather than obedience. Option {opt2} confuses a request for help with a treaty obligation. Keep those two apart.",
     "id": 11,
     "slot": 11,
     "section": "The powers arrive",
@@ -758,7 +778,7 @@ const QUESTIONS = [
       "Independence was declared before the coup happened in Lisbon"
     ],
     "correct": 0,
-    "explanation": "The timing's tight rather than obviously wrong, which is what makes it worth a second look from you. The first unit went in the days around 5 November, and the fighting followed independence on the 11th. Option {opt3} is a chronology error big enough to sink a paragraph.",
+    "explanation": "The timing is tight rather than obviously wrong, which is why it is worth a second look. The first unit went in around 5 November. The fighting followed independence on the 11th. Option {opt3} is a chronology error big enough to sink a paragraph.",
     "id": 12,
     "slot": 12,
     "section": "The powers arrive",
@@ -773,7 +793,7 @@ const QUESTIONS = [
       "About three years"
     ],
     "correct": 0,
-    "explanation": "About a month. The gap is what tells you the advance was aimed at who'd hold Luanda on the day. Option {opt2} would make the invasion a response to an MPLA government rather than an attempt to prevent one.",
+    "explanation": "About a month. The gap is what tells you the advance was aimed at who would hold Luanda on the day. Option {opt2} would make the invasion a response to an MPLA government rather than an attempt to prevent one.",
     "id": 13,
     "slot": 13,
     "section": "South Africa",
@@ -788,7 +808,7 @@ const QUESTIONS = [
       "The immediate independence of Namibia by treaty"
     ],
     "correct": 0,
-    "explanation": "Bases: SWAPO fighting for Namibia, and the ANC closer to South Africa itself. Option {opt2} is what Pretoria was trying to prevent, so it answers a question you weren't asked.",
+    "explanation": "Bases. SWAPO was fighting for Namibia. The ANC would be closer to South Africa itself. Option {opt2} is what Pretoria was trying to prevent, so it answers a question you were not asked.",
     "id": 14,
     "slot": 14,
     "section": "South Africa",
@@ -818,7 +838,7 @@ const QUESTIONS = [
       "The Cabinda raid"
     ],
     "correct": 0,
-    "explanation": "Cuito Cuanavale. The disagreement over who won it is itself examinable, so you need the name. Option {opt1} isn't an event in the form given here.",
+    "explanation": "Cuito Cuanavale. The disagreement over who won it is itself examinable, so you need the name. Option {opt1} is not an event in the form given here.",
     "id": 16,
     "slot": 16,
     "section": "Cuito Cuanavale and after",
@@ -833,7 +853,7 @@ const QUESTIONS = [
       "Namibia remained under South African rule after the accords"
     ],
     "correct": 0,
-    "explanation": "Fighting inside Angola carried on for years afterwards. The accords settled the regional and Cold War dimension, and you should keep that apart from the civil war. Option {opt3} is wrong: Namibia became independent in 1990.",
+    "explanation": "Fighting inside Angola carried on for years afterwards. The accords settled the regional and Cold War side of it. Keep that apart from the civil war. Option {opt3} is wrong, because Namibia became independent in 1990.",
     "id": 17,
     "slot": 17,
     "section": "Cuito Cuanavale and after",
@@ -848,7 +868,7 @@ const QUESTIONS = [
       "Reliability depends only on when a source was first written"
     ],
     "correct": 0,
-    "explanation": "A source arguing a case is still solid evidence of what that case was and who made it. You're better off saying what each one is good for than dismissing both. Option {opt1} sounds cautious and even-handed, which is exactly why it costs you.",
+    "explanation": "A source arguing a case is still solid evidence of what that case was. It also tells you who made it. Say what each one is good for rather than dismissing both. Option {opt1} sounds cautious and even-handed, which is exactly why it costs you marks.",
     "id": 18,
     "slot": 18,
     "section": "Cuito Cuanavale and after",
@@ -994,20 +1014,9 @@ document.getElementById('prev-btn').addEventListener('click', () => {
 document.getElementById('exit-btn').addEventListener('click', () => { quiz.classList.add('hidden'); menu.classList.remove('hidden'); });
 document.getElementById('restart-btn').addEventListener('click', () => { review.classList.add('hidden'); menu.classList.remove('hidden'); });
 
-/* v2.1. Every file in a unit now ends the same way: Finish, then a pop-up whose
-   only job is to tell the learner to tap the platform's Done control. The four
-   knowledge checks previously ended on the results screen with no instruction,
-   so two files in every seven closed differently from the other five. */
-document.getElementById('finish-btn').addEventListener('click', () => {
-  const back = document.createElement('div');
-  back.className = 'pop-back';
-  back.innerHTML = '<div class="pop"><div class="pop-label">' + DONE_LABEL +
-    '</div><h3 style="margin:.4rem 0 .2rem;font-size:1.05rem;">' + DONE_TITLE +
-    '</h3><div class="pop-text">' + DONE_TEXT +
-    '</div><button class="pop-btn" id="fin-ok">Done</button></div>';
-  document.body.appendChild(back);
-  document.getElementById('fin-ok').addEventListener('click', () => back.remove());
-});
+/* The button at the end of the file is the thing that continues. It does not
+   point at a control somewhere else on the page. */
+document.getElementById('finish-btn').addEventListener('click', () => { KulaLMS.advance(); });
 
 function weakestSection(){
   let worst = SECTIONS[0], worstPct = 2;
@@ -1085,6 +1094,9 @@ function showReview(){
     rows.innerHTML += `<div class="breakdown-row"><div class="breakdown-name">${sec}</div><div class="breakdown-bar"><div class="breakdown-fill" style="width:${p}%"></div></div><div class="breakdown-score">${got}/${qs.length}</div></div>`;
   });
 
+  const closing = document.getElementById('closing-line');
+  if(CLOSING_TEXT){ closing.textContent = CLOSING_TEXT; closing.classList.remove('hidden'); }
+
   const cards = document.getElementById('review-cards'); cards.innerHTML = '';
   state.list.forEach((q, i) => {
     const your = state.answers[q.id];
@@ -1102,6 +1114,7 @@ function showReview(){
     cards.appendChild(card);
   });
   window.scrollTo({top:0,behavior:'smooth'});
+  KulaLMS.completed();
 }
 
 buildMenu();
@@ -1112,30 +1125,36 @@ buildMenu();
    Injects its own button so there is no stray markup, and lives inside the
    single script block so a first-to-last script extraction still parses. */
 (function(){
-  var NATIVE = "light";
-  try{ if(localStorage.getItem("kula-mode")==="alt"){ document.body.classList.add("alt"); } }catch(e){}
+  /* What is stored is the mode the learner chose, "light" or "dark". Never a
+     class name and never "native": neither describes anything on a unit built
+     the other way round. For an essay unit set NATIVE "dark", FLIP "light",
+     CLS "bright". Nothing else changes. */
+  var NATIVE = "light";   // the mode this unit is designed in
+  var FLIP   = "dark";    // the mode the toggle offers
+  var CLS    = "dark";    // the class that produces FLIP in this unit
+  try{ if(localStorage.getItem("kula-mode")===FLIP){ document.body.classList.add(CLS); } }catch(e){}
   var SUN='<circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/>';
   var MOON='<path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/>';
-  var b=document.getElementById("mode-toggle");
+  var b=document.getElementById("kula-mode-toggle");
   if(!b){
     b=document.createElement("button");
-    b.className="mode-toggle"; b.id="mode-toggle"; b.type="button";
+    b.className="mode-toggle"; b.id="kula-mode-toggle"; b.type="button";
     b.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true" id="mode-icon"></svg><span id="mode-label"></span>';
     document.body.appendChild(b);
   }
   var lab=document.getElementById("mode-label"), ic=document.getElementById("mode-icon");
   function paint(){
-    var onAlt=document.body.classList.contains("alt");
-    var showing = onAlt ? (NATIVE==="dark" ? "light" : "dark") : NATIVE;
+    var flipped = document.body.classList.contains(CLS);
+    var showing = flipped ? FLIP : NATIVE;
     var offering = showing==="dark" ? "light" : "dark";
-    lab.textContent = offering==="light" ? "Light Mode" : "Dark Mode";
+    lab.textContent = offering==="light" ? "Light mode" : "Dark mode";
     ic.innerHTML = offering==="light" ? SUN : MOON;
-    b.setAttribute("aria-pressed", onAlt ? "true" : "false");
+    b.setAttribute("aria-pressed", showing==="dark" ? "true" : "false");
     b.setAttribute("aria-label", "Switch to " + offering + " mode");
   }
   b.addEventListener("click",function(){
-    var onAlt=document.body.classList.toggle("alt");
-    try{ localStorage.setItem("kula-mode", onAlt ? "alt" : "native"); }catch(e){}
+    var flipped=document.body.classList.toggle(CLS);
+    try{ localStorage.setItem("kula-mode", flipped ? FLIP : NATIVE); }catch(e){}
     paint();
   });
   paint();
