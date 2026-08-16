@@ -50,14 +50,14 @@
     --ink-deep:   #12202a;              /* --ink one step darker, button hover */
     --a2-deep:    #164C3F;              /* --a2 one step darker, button hover */
     --ok-bg:      rgba(var(--a2-rgb),0.13);  /* a correct option, a placed item */
-    --no-bg:      rgba(140,74,47,0.13);      /* a wrong option, a misplaced item */
+    --no-bg:      rgba(var(--a1-rgb),0.13);   /* a wrong option, a misplaced item */
     /* Skill chips. a = the entry-level skill (Extract, Argue, Evidence, Recall).
        b = the middle skill (Interpret, Understand). c = unassessed instinct.
        The top skill (Evaluate, Weigh, Apply) sits on a solid accent ground. */
     --chip-a-bg: rgba(var(--a1-rgb),0.16);  --chip-a-fg: var(--a1);
     --chip-b-bg: rgba(var(--a2-rgb),0.16);  --chip-b-fg: var(--a2);
     --chip-c-bg: rgba(0,0,0,0.06);
-    --scrim:  rgba(27,42,51,0.5);       /* modal backdrop */
+    --scrim:  rgba(26,18,32,0.5);       /* modal backdrop */
     --inset:  rgba(255,255,255,0.4);    /* sort column well */
 
     /* Legacy aliases. Older skins and the quiz shell reference these. */
@@ -138,23 +138,23 @@
 
 :root {
   /* grounds and ink: cool slate against a cold paper, not warm sand */
-  --sand:  #E4E7E4;   /* page background */
-  --paper: #F7F8F6;   /* cards */
-  --cut:   #EDF0EE;   /* insets, sources, carousels */
-  --ink:   #1A2327;   /* body text */
+  --sand:  #EDE9F2;   /* page background */
+  --paper: #FDFCFE;   /* cards */
+  --cut:   #EFEBF3;   /* insets, sources, carousels */
+  --ink:   #1A1220;   /* body text */
   /* Stage tags and quiet labels. Was #5C6B73, which cleared 4.5 on a card but
      measured 4.43 on the --sand page ground, where the eyebrows actually sit. */
-  --clay:  #55636B;   /* stage tags, quiet labels: steel, not terracotta */
+  --clay:  #4E4A57;   /* stage tags, quiet labels: steel, not terracotta */
   /* Muted text: captions, attributions, the question counter, the running tally.
      The previous value measured 3.04 against the grounds it actually sits on. */
-  --fade:  #5C666E;   /* muted text, captions */
+  --fade:  #5A5563;   /* muted text, captions */
   /* accents: brick red for the argued line, deep teal for the settled one */
-  --a1: #9C3D2E;  --a1-rgb: 156,61,46;
-  --a2: #24565C;  --a2-rgb: 36,86,92;
+  --a1: #B00070;  --a1-rgb: 176,0,112;
+  --a2: #0C6E86;  --a2-rgb: 12,110,134;
   /* The two hover steps are derived, not identity. Left in the engine block they
      kept the engine's bottle green against this skin's deep teal. */
-  --ink-deep: #13191C;
-  --a2-deep:  #1A3E42;
+  --ink-deep: #0F0A14;
+  --a2-deep:  #085366;
   /* type: a transitional serif for the history, mono for anything with a symbol */
   --serif: Georgia, 'Times New Roman', serif;
   --sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -165,14 +165,14 @@
    surface with a faint vertical rule, like paper on a table. */
 body {
   background-image:
-    repeating-linear-gradient(90deg, transparent 0 38px, rgba(26,35,39,0.028) 38px 39px) !important;
+    repeating-linear-gradient(90deg, transparent 0 38px, rgba(26,18,32,0.028) 38px 39px) !important;
 }
 
 /* Edges are square and ruled rather than soft. Every card carries a hairline
    and a single accent stripe at the head. */
 .card, .source, .stat-wrap, .carousel, .kt {
   border-radius: 0 !important;
-  border: 1px solid rgba(36,86,92,0.20) !important;
+  border: 1px solid rgba(12,110,134,0.20) !important;
   box-shadow: none !important;
 }
 .card { border-top: 3px solid var(--a2) !important; }
@@ -198,7 +198,7 @@ body {
   text-transform: uppercase;
   color: var(--a1) !important;
   text-align: right;
-  border-bottom: 1px solid rgba(36,86,92,0.18);
+  border-bottom: 1px solid rgba(12,110,134,0.18);
   padding-bottom: 0.6rem;
   margin-bottom: 0.9rem;
 }
@@ -212,7 +212,7 @@ body {
   height: 2px !important;
   background-image: none !important;
   background: linear-gradient(90deg,
-    var(--a1) 0 20%, rgba(36,86,92,0.30) 20% 100%) !important;
+    var(--a1) 0 20%, rgba(12,110,134,0.30) 20% 100%) !important;
 }
 
 /* The cover lede is italic serif in v2; here it is upright, so the opening
@@ -234,36 +234,36 @@ body {
 /* Dark mode. The slate ground goes to deep ink and the papers to a cold
    charcoal, so the chamber reads as the same room after hours. */
 body.dark {
-  --sand:  #141A1D;
-  --paper: #1D2529;
-  --cut:   #232C31;
-  --ink:   #E6EBEA;
-  --clay:  #93A3AB;
-  --fade:  #8B979D;
-  /* Was #D0664F: 4.37 on the card and 3.86 on the --cut insets, where the option
+  --sand:  #0E0A13;
+  --paper: #191320;
+  --cut:   #241B2D;
+  --ink:   #F2EDF8;
+  --clay:  #9E96AC;
+  --fade:  #8F87A0;
+  /* Was #FF6ECF: 4.37 on the card and 3.86 on the --cut insets, where the option
      letters, the rank numbers and the source attributions sit. */
-  --a1: #E0836E;  --a1-rgb: 224,131,110;
-  --a2: #58A6A2;  --a2-rgb: 88,166,162;
+  --a1: #FF6ECF;  --a1-rgb: 255,110,207;
+  --a2: #3DDCF2;  --a2-rgb: 61,220,242;
   /* On a dark ground a hover step goes lighter, not deeper. */
   --ink-deep: #FFFFFF;
-  --a2-deep:  #7CBFBB;
+  --a2-deep:  #7BE8F7;
 }
 body.dark { background-image:
-  repeating-linear-gradient(90deg, transparent 0 38px, rgba(230,235,234,0.035) 38px 39px) !important; }
+  repeating-linear-gradient(90deg, transparent 0 38px, rgba(242,237,248,0.035) 38px 39px) !important; }
 body.dark .card, body.dark .source, body.dark .stat-wrap,
-body.dark .carousel, body.dark .kt { border-color: rgba(88,166,162,0.28) !important; }
+body.dark .carousel, body.dark .kt { border-color: rgba(61,220,242,0.28) !important; }
 body.dark .btn-begin { border-color: var(--ink) !important; color: var(--ink) !important; }
 body.dark .btn-begin:hover { background: var(--ink) !important; color: var(--sand) !important; }
-body.dark .mode-toggle { background: var(--paper); border-color: rgba(230,235,234,0.24); }
+body.dark .mode-toggle { background: var(--paper); border-color: rgba(242,237,248,0.24); }
 
 /* The RECALL chip keeps its light background in dark mode, so it glares.
    Tier chips get dark-mode grounds of their own. */
-body.dark .chip { background: rgba(88,166,162,0.16) !important; color: #BFE0DD !important; }
-body.dark .chip-recall,  body.dark .chip-extract   { background: rgba(208,102,79,0.20) !important; color: #F0BAAB !important; }
-body.dark .chip-understand, body.dark .chip-interpret { background: rgba(88,166,162,0.18) !important; color: #B7DEDA !important; }
-body.dark .chip-apply,   body.dark .chip-evaluate  { background: rgba(230,235,234,0.16) !important; color: #E6EBEA !important; }
+body.dark .chip { background: rgba(61,220,242,0.16) !important; color: #BEF3FB !important; }
+body.dark .chip-recall,  body.dark .chip-extract   { background: rgba(255,110,207,0.20) !important; color: #FFC4E9 !important; }
+body.dark .chip-understand, body.dark .chip-interpret { background: rgba(61,220,242,0.18) !important; color: #B4F1FA !important; }
+body.dark .chip-apply,   body.dark .chip-evaluate  { background: rgba(242,237,248,0.16) !important; color: #F2EDF8 !important; }
 /* Options need a visible edge against the charcoal card. */
-body.dark .option-btn, body.dark .opt-btn { border-color: rgba(230,235,234,0.20) !important; }
+body.dark .option-btn, body.dark .opt-btn { border-color: rgba(242,237,248,0.20) !important; }
 
 
 /* ---- DARK MODE STATE COLOURS -----------------------------------------------
@@ -272,65 +272,65 @@ body.dark .option-btn, body.dark .opt-btn { border-color: rgba(230,235,234,0.20)
 
 /* Answer states: dark grounds with a coloured edge, text stays --ink. */
 body.dark .option-btn.correct {
-  background: rgba(88,166,162,0.16) !important;
-  border-color: #58A6A2 !important;
+  background: rgba(61,220,242,0.16) !important;
+  border-color: #3DDCF2 !important;
   color: var(--ink) !important;
 }
 body.dark .option-btn.wrong {
-  background: rgba(208,102,79,0.16) !important;
-  border-color: #D0664F !important;
+  background: rgba(255,110,207,0.16) !important;
+  border-color: #FF6ECF !important;
   color: var(--ink) !important;
 }
 body.dark .option-btn.correct .opt-text,
 body.dark .option-btn.wrong   .opt-text { color: var(--ink) !important; }
-body.dark .option-btn.correct .opt-letter { color: #7FC7C2 !important; }
-body.dark .option-btn.wrong   .opt-letter { color: #E89A87 !important; }
+body.dark .option-btn.correct .opt-letter { color: #A5EFFA !important; }
+body.dark .option-btn.wrong   .opt-letter { color: #FFA8DF !important; }
 body.dark .opt-mark { color: var(--ink) !important; }
 /* v2 dims the options a learner did not pick; at 0.45 on a dark ground they vanish. */
 
 /* The full-check button is dark-on-dark once the ground inverts. */
 body.dark .primary-btn {
   background: var(--cut) !important;
-  border: 1px solid rgba(88,166,162,0.40) !important;
+  border: 1px solid rgba(61,220,242,0.40) !important;
   color: var(--ink) !important;
 }
-body.dark .primary-btn:hover { background: #2B363C !important; }
+body.dark .primary-btn:hover { background: #2E2438 !important; }
 body.dark .primary-btn .btn-title { color: var(--ink) !important; }
 body.dark .primary-btn .btn-sub,
 body.dark .primary-btn .btn-arrow { color: var(--clay) !important; }
 
 /* Section rows and the small action button. */
-body.dark .section-btn { border-color: rgba(230,235,234,0.18) !important; color: var(--ink) !important; }
+body.dark .section-btn { border-color: rgba(242,237,248,0.18) !important; color: var(--ink) !important; }
 body.dark .section-btn:hover { background: var(--cut) !important; border-color: var(--a2) !important; }
-body.dark .primary-btn-small { background: var(--a2) !important; color: #0E1518 !important; }
-body.dark .primary-btn-small:hover:not(:disabled) { background: #6FBCB7 !important; }
-body.dark .secondary-btn { border-color: rgba(230,235,234,0.30) !important; color: var(--ink) !important; }
+body.dark .primary-btn-small { background: var(--a2) !important; color: #0E0A13 !important; }
+body.dark .primary-btn-small:hover:not(:disabled) { background: #7BE8F7 !important; }
+body.dark .secondary-btn { border-color: rgba(242,237,248,0.30) !important; color: var(--ink) !important; }
 body.dark .secondary-btn:hover:not(:disabled) { background: var(--cut) !important; }
 
 /* The explanation panel and the quiz footer links. */
-body.dark .explanation { background: var(--cut) !important; border-color: rgba(88,166,162,0.28) !important; }
+body.dark .explanation { background: var(--cut) !important; border-color: rgba(61,220,242,0.28) !important; }
 body.dark .expl-text { color: var(--ink) !important; }
 body.dark .quiz-foot a, body.dark .quiz-foot { color: var(--clay) !important; }
 
 
 /* The lesson engine uses .option where the quiz uses .option-btn, so the
    state overrides have to name both or half the product stays broken. */
-body.dark .option { background: var(--cut) !important; border-color: rgba(230,235,234,0.18) !important; color: var(--ink) !important; }
-body.dark .option.selected { background: rgba(208,102,79,0.14) !important; border-color: #D0664F !important; }
+body.dark .option { background: var(--cut) !important; border-color: rgba(242,237,248,0.18) !important; color: var(--ink) !important; }
+body.dark .option.selected { background: rgba(255,110,207,0.14) !important; border-color: #FF6ECF !important; }
 body.dark .option.correct {
-  background: rgba(88,166,162,0.16) !important;
-  border-color: #58A6A2 !important;
+  background: rgba(61,220,242,0.16) !important;
+  border-color: #3DDCF2 !important;
   color: var(--ink) !important;
 }
 body.dark .option.wrong {
-  background: rgba(208,102,79,0.16) !important;
-  border-color: #D0664F !important;
+  background: rgba(255,110,207,0.16) !important;
+  border-color: #FF6ECF !important;
   color: var(--ink) !important;
 }
 body.dark .option.correct .opt-text,
 body.dark .option.wrong   .opt-text { color: var(--ink) !important; }
-body.dark .option.correct .opt-letter { color: #7FC7C2 !important; }
-body.dark .option.wrong   .opt-letter { color: #E89A87 !important; }
+body.dark .option.correct .opt-letter { color: #A5EFFA !important; }
+body.dark .option.wrong   .opt-letter { color: #FFA8DF !important; }
 
 
 /* The toggle is fixed bottom right and lands on the Continue button on a short
@@ -349,12 +349,12 @@ body { padding-bottom: 4.5rem !important; }
   margin-left: auto; margin-right: auto;
   font-size: 0.84rem !important;
   color: var(--clay) !important;
-  border-top: 1px solid rgba(36,86,92,0.20);
+  border-top: 1px solid rgba(12,110,134,0.20);
   padding-top: 0.6rem;
 }
-.figure img { border: 1px solid rgba(36,86,92,0.30) !important; }
-body.dark .figure img { border-color: rgba(88,166,162,0.30) !important; }
-body.dark .figure figcaption { border-top-color: rgba(88,166,162,0.24); }
+.figure img { border: 1px solid rgba(12,110,134,0.30) !important; }
+body.dark .figure img { border-color: rgba(61,220,242,0.30) !important; }
+body.dark .figure figcaption { border-top-color: rgba(61,220,242,0.24); }
 /* An archival photograph should not glare against the dark ground. */
 body.dark .figure img { filter: brightness(0.9) contrast(1.02); }
 
@@ -520,8 +520,8 @@ body.dark .figure img { filter: brightness(0.9) contrast(1.02); }
    wrong red is the hard pair for the commonest form of colour
    blindness.
    ============================================================ */
-:root { --ok: #2E6B3A; --ok-rgb: 46,107,58; --on-ok: #F7F8F6; }
-body.dark { --ok: #93D98A; --ok-rgb: 147,217,138; --on-ok: #141A1D; }
+:root { --ok: #2E6B3A; --ok-rgb: 46,107,58; --on-ok: #FDFCFE; }
+body.dark { --ok: #93D98A; --ok-rgb: 147,217,138; --on-ok: #0E0A13; }
 
 .option.correct, .option-btn.correct,
 body.dark .option.correct, body.dark .option-btn.correct {
